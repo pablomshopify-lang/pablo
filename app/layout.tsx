@@ -10,12 +10,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Maverick Live · Una nueva etapa',
+  title: 'Maverick Live · Productora de eventos',
   description:
-    'Maverick Live está preparando una nueva etapa. Déjanos tu correo y te avisamos primero.',
+    'Mucho más que eventos. En Maverick Live creamos experiencias únicas. Déjanos tu correo y entérate primero de lo que viene.',
   openGraph: {
-    title: 'Maverick Live · Una nueva etapa',
-    description: 'Déjanos tu correo y te avisamos primero.',
+    title: 'Maverick Live · Productora de eventos',
+    description: 'Mucho más que eventos. Creamos experiencias únicas.',
     type: 'website',
     locale: 'es_CL',
   },

@@ -56,7 +56,7 @@ export function SubscribeForm({ className }: SubscribeFormProps) {
       }
       setStatus({
         kind: 'ok',
-        message: '¡Gracias! Te avisaremos apenas estemos listos.',
+        message: '¡Gracias! Te escribiremos con lo próximo de Maverick Live.',
       });
       setEmail('');
     } catch (err) {

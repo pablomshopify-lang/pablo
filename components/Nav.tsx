@@ -10,7 +10,7 @@ export function Nav() {
         </Link>
         <ul className="nav-links">
           <li>
-            <a href="#experiencia">Experiencia</a>
+            <a href="#que-hacemos">Qué hacemos</a>
           </li>
           <li>
             <a href="#suscribete" className="button button-small">

@@ -5,23 +5,23 @@ import { SubscribeForm } from '@/components/SubscribeForm';
 
 const FEATURES = [
   {
-    title: 'En vivo',
-    text: 'Lo que pasa, cuando pasa. Sin esperas y sin perderte nada.',
+    title: 'Producción integral',
+    text: 'De la idea al montaje: planificación, proveedores y ejecución con un solo equipo.',
     wide: true,
   },
   {
-    title: 'Contenido original',
-    text: 'Historias y formatos creados para esta nueva etapa.',
+    title: 'Shows y conciertos',
+    text: 'Escenario, sonido y luces para que el público lo viva al máximo.',
     wide: false,
   },
   {
-    title: 'Comunidad',
-    text: 'Un lugar para encontrarte con quienes viven lo mismo que tú.',
+    title: 'Eventos de marca',
+    text: 'Lanzamientos, convenciones y celebraciones que hablan por tu empresa.',
     wide: false,
   },
   {
-    title: 'En todas tus pantallas',
-    text: 'En el teléfono, el computador o la tele. Empieza en uno y sigue en otro.',
+    title: 'Experiencias a medida',
+    text: 'Si lo imaginas, lo diseñamos. Formatos únicos para momentos que no se repiten.',
     wide: true,
   },
 ] as const;
@@ -39,26 +39,26 @@ export default function Home() {
           <Reveal>
             <p className="eyebrow">
               <span className="live-dot" aria-hidden="true" />
-              Muy pronto
+              Productora de eventos
             </p>
           </Reveal>
           <Reveal delay={80}>
             <h1 id="hero-title" className="display">
-              Maverick Live.
+              Mucho más que eventos.
               <br />
-              <span className="gradient-text">Una nueva etapa.</span>
+              <span className="gradient-text">Experiencias únicas.</span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
             <p className="lede">
-              Estamos preparando algo completamente nuevo. Déjanos tu correo y
-              serás de los primeros en verlo.
+              En Maverick Live creamos experiencias únicas. Déjanos tu correo y
+              entérate primero de lo que viene.
             </p>
           </Reveal>
           <Reveal delay={240} className="hero-form">
             <SubscribeForm />
             <p className="fineprint">
-              Sin spam. Solo te escribiremos para avisarte del lanzamiento.
+              Sin spam. Solo novedades y próximos eventos de Maverick Live.
             </p>
           </Reveal>
           <Reveal delay={320} className="hero-mark-wrap">
@@ -67,24 +67,24 @@ export default function Home() {
         </section>
 
         <section
-          id="experiencia"
+          id="que-hacemos"
           className="section statement"
           aria-labelledby="statement-title"
         >
           <Reveal>
             <h2 id="statement-title" className="headline">
-              Hecho para vivirse <span className="gradient-text">en vivo.</span>
+              Cada detalle, <span className="gradient-text">en vivo.</span>
             </h2>
           </Reveal>
           <Reveal delay={100}>
             <p className="lede">
-              Una experiencia más simple, más rápida y más cercana. Todo lo que
-              te gusta de Maverick Live, pensado otra vez desde cero.
+              Producimos eventos que se sienten, se recuerdan y se comparten. De
+              la primera idea al último aplauso, nos encargamos de todo.
             </p>
           </Reveal>
         </section>
 
-        <section className="section bento-section" aria-label="Lo que viene">
+        <section className="section bento-section" aria-label="Qué hacemos">
           <ul className="bento">
             {FEATURES.map((feature, i) => (
               <li key={feature.title} className={feature.wide ? 'wide' : ''}>
@@ -104,12 +104,13 @@ export default function Home() {
         >
           <Reveal>
             <h2 id="cta-title" className="headline">
-              Sé de los primeros.
+              Vive lo que viene.
             </h2>
           </Reveal>
           <Reveal delay={100}>
             <p className="lede">
-              Te mandamos un solo correo, el día que abramos las puertas.
+              Déjanos tu correo y te contamos antes que nadie sobre nuestros
+              próximos eventos.
             </p>
           </Reveal>
           <Reveal delay={200} className="hero-form">
