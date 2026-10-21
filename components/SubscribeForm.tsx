@@ -6,6 +6,9 @@ import type { FormEvent } from 'react';
 // Formulario "Suscriptores web" en Formspree. Se puede cambiar con la variable
 // NEXT_PUBLIC_FORMSPREE_ID sin tocar el código.
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'xyekqdeo';
+// Opcional: Google Apps Script que guarda el correo en una hoja y manda la
+// bienvenida. Se configura con esta variable en Vercel.
+const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Status =
@@ -55,6 +58,15 @@ export function SubscribeForm({ className }: SubscribeFormProps) {
       if (!res.ok) {
         const data = (await res.json().catch(() => ({}))) as FormspreeResponse;
         throw new Error(data.errors?.map((e) => e.message).join(', ') ?? '');
+      }
+      if (GOOGLE_SCRIPT_URL) {
+        // Google no deja leer la respuesta desde otra web (no-cors): se envía
+        // sin esperar resultado, y si falla el correo igual quedó en Formspree.
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new URLSearchParams({ email: email.trim() }),
+        }).catch(() => undefined);
       }
       setStatus({
         kind: 'ok',
