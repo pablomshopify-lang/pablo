@@ -3,7 +3,9 @@
 import { useId, useState } from 'react';
 import type { FormEvent } from 'react';
 
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+// Formulario "Suscriptores web" en Formspree. Se puede cambiar con la variable
+// NEXT_PUBLIC_FORMSPREE_ID sin tocar el código.
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'xyekqdeo';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Status =

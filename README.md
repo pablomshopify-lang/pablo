@@ -34,7 +34,7 @@ npm run dev                  # abre http://localhost:3000
 2. Copia el endpoint, por ejemplo `https://formspree.io/f/xyzabcd`. El ID es `xyzabcd`.
 3. Pon ese ID en la variable `NEXT_PUBLIC_FORMSPREE_ID` (en `.env.local` y en Vercel).
 
-Sin el ID, el formulario funciona en modo demostración y no envía nada.
+El formulario ya viene conectado al ID `xyekqdeo`. La variable solo hace falta si algún día quieres usar otro formulario.
 
 ## Publicar en Vercel
 
