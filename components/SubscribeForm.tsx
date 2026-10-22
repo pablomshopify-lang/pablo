@@ -6,9 +6,9 @@ import type { FormEvent } from 'react';
 // Formulario "Suscriptores web" en Formspree. Se puede cambiar con la variable
 // NEXT_PUBLIC_FORMSPREE_ID sin tocar el código.
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'xyekqdeo';
-// Opcional: Google Apps Script que guarda el correo en una hoja y manda la
-// bienvenida. Se configura con esta variable en Vercel.
-const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+// Opcional: script que guarda el correo y manda la bienvenida (suscribir.php
+// en SiteGround o un Google Apps Script). Se configura con esta variable en Vercel.
+const WELCOME_URL = process.env.NEXT_PUBLIC_WELCOME_URL;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Status =
@@ -29,6 +29,8 @@ export function SubscribeForm({ className }: SubscribeFormProps) {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
+    const trap = form.elements.namedItem('_gotcha');
+    const honeypot = trap instanceof HTMLInputElement ? trap.value : '';
 
     if (!EMAIL_RE.test(email.trim())) {
       setStatus({
@@ -59,13 +61,16 @@ export function SubscribeForm({ className }: SubscribeFormProps) {
         const data = (await res.json().catch(() => ({}))) as FormspreeResponse;
         throw new Error(data.errors?.map((e) => e.message).join(', ') ?? '');
       }
-      if (GOOGLE_SCRIPT_URL) {
-        // Google no deja leer la respuesta desde otra web (no-cors): se envía
-        // sin esperar resultado, y si falla el correo igual quedó en Formspree.
-        await fetch(GOOGLE_SCRIPT_URL, {
+      if (WELCOME_URL) {
+        // Se envía sin leer la respuesta (no-cors): si falla, el correo igual
+        // quedó guardado en Formspree.
+        await fetch(WELCOME_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: new URLSearchParams({ email: email.trim() }),
+          body: new URLSearchParams({
+            email: email.trim(),
+            _gotcha: honeypot,
+          }),
         }).catch(() => undefined);
       }
       setStatus({
