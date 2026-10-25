@@ -473,6 +473,34 @@ main {
   box-shadow: inset 0 0 0 1px var(--line);
 }
 
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.pillars li {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.pillars h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+}
+
+.pillars p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
 /* ---------- Llamado final ---------- */
 .cta .actions {
   margin-top: 2rem;
@@ -565,7 +593,8 @@ main {
   }
 
   .bento,
-  .steps {
+  .steps,
+  .pillars {
     grid-template-columns: 1fr;
   }
 

@@ -55,6 +55,21 @@ const STEPS = [
   },
 ] as const;
 
+const PILLARS = [
+  {
+    title: 'Atención personal',
+    text: 'Un equipo que conoce tu proyecto y te acompaña en cada lanzamiento.',
+  },
+  {
+    title: 'Servicio a tu medida',
+    text: 'Asesoría de profesionales de la comunicación musical, según lo que necesita tu carrera.',
+  },
+  {
+    title: '100% independientes',
+    text: 'Una plataforma de distribución independiente, que respeta cada acuerdo legal.',
+  },
+] as const;
+
 export default function Home() {
   const year = new Date().getFullYear();
 
@@ -68,7 +83,7 @@ export default function Home() {
           <Reveal>
             <p className="eyebrow">
               <span className="dot" aria-hidden="true" />
-              Distribución musical
+              Distribución musical boutique
             </p>
           </Reveal>
           <Reveal delay={80}>
@@ -80,7 +95,8 @@ export default function Home() {
           </Reveal>
           <Reveal delay={160}>
             <p className="lede">
-              Descubre la plataforma que conecta tu música con el mundo.
+              Descubre la plataforma que conecta tu música con el mundo, con la
+              atención personal de un servicio boutique.
             </p>
           </Reveal>
           <Reveal delay={240} className="actions">
@@ -174,13 +190,21 @@ export default function Home() {
           <Reveal className="about-card">
             <p className="eyebrow">Acerca de nosotros</p>
             <h2 id="nosotros-title" className="headline">
-              100% <span className="gradient-text">independientes.</span>
+              Un servicio <span className="gradient-text">boutique.</span>
             </h2>
             <p className="lede">
-              Somos una plataforma de distribución digital independiente, que
-              respeta cada acuerdo legal. Asesoramos a artistas independientes
-              con un equipo de profesionales de la comunicación musical.
+              No eres un número más en un catálogo. Trabajamos como un servicio
+              boutique: cada artista recibe atención personal y un servicio
+              pensado para su música.
             </p>
+            <ul className="pillars">
+              {PILLARS.map((pillar) => (
+                <li key={pillar.title}>
+                  <h3>{pillar.title}</h3>
+                  <p>{pillar.text}</p>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </section>
 
