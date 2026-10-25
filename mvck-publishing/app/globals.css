@@ -288,62 +288,6 @@ main {
   filter: drop-shadow(0 1.5rem 3rem rgb(244 157 0 / 0.35));
 }
 
-/* Etiquetas flotantes con tipos de regalía alrededor del isotipo */
-.chips {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.chip {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.875rem;
-  border-radius: 999px;
-  background: rgb(20 20 22 / 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow:
-    inset 0 0 0 1px var(--line),
-    0 0.75rem 2rem rgb(0 0 0 / 0.4);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  white-space: nowrap;
-  animation: float 6s ease-in-out infinite alternate;
-}
-
-.chip-dot {
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 50%;
-  background: var(--brand);
-}
-
-.chip-1 {
-  top: 8%;
-  left: 0;
-}
-
-.chip-2 {
-  top: 46%;
-  right: -4%;
-  animation-delay: -2s;
-}
-
-.chip-3 {
-  bottom: 4%;
-  left: 6%;
-  animation-delay: -4s;
-}
-
-@keyframes float {
-  to {
-    transform: translateY(-0.5rem);
-  }
-}
-
 /* ---------- Mosaico de servicios (bento) ---------- */
 .services .headline {
   margin-bottom: clamp(2.5rem, 6vw, 4rem);
@@ -718,23 +662,6 @@ main {
     grid-column: span 2;
   }
 
-  .hero-visual {
-    gap: 1.5rem;
-    min-height: 0;
-  }
-
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  .chip {
-    position: static;
-    font-size: 0.75rem;
-  }
-
   .bento li.wide {
     grid-column: auto;
   }
@@ -757,10 +684,6 @@ main {
   [data-reveal] {
     transform: none;
     transition: opacity 300ms ease;
-  }
-
-  .chip {
-    animation: none;
   }
 
   .button:active {
