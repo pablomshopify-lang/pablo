@@ -1,0 +1,633 @@
+/* ---------- Colores y medidas de marca (cambia aquí para ajustar todo el sitio) ---------- */
+:root {
+  --bg: #000;
+  --surface: #0d0e10;
+  --fg: #f5f5f7;
+  --muted: #a1a1a6;
+  --line: rgb(255 255 255 / 0.1);
+  /* Celeste corporativo del manual: R0 G175 B216 */
+  --brand: #00afd8;
+  --brand-hover: #2cc6ea;
+  /* Magenta y azul de las fotografías del manual */
+  --magenta: #e5007e;
+  --blue: #3a5bff;
+  --gradient: linear-gradient(
+    100deg,
+    var(--magenta) 0%,
+    var(--blue) 50%,
+    var(--brand) 100%
+  );
+  --radius: 1.75rem;
+  --gutter: max(1rem, env(safe-area-inset-left, 0px));
+  --max: 68rem;
+  /* Curva "sin rebote", similar a un resorte críticamente amortiguado */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font:
+    100%/1.5 var(--font-inter),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 1.0625rem;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+/* ---------- Tipografía: letra ancha de marca en títulos ---------- */
+.display,
+.headline {
+  font-family: var(--font-display), var(--font-inter), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.display {
+  font-size: clamp(2.25rem, 7.5vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.headline {
+  font-size: clamp(1.75rem, 5vw, 3.75rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+
+.lede {
+  font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  max-width: 40ch;
+  margin-inline: auto;
+  text-wrap: pretty;
+}
+
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 0.75rem var(--brand);
+}
+
+/* ---------- Botones: respuesta inmediata al presionar ---------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.875rem 1.5rem;
+  background: var(--brand);
+  color: #000;
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out),
+    transform 100ms ease-out;
+}
+
+.button:hover {
+  background: var(--brand-hover);
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.button-ghost {
+  background: rgb(255 255 255 / 0.06);
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.button-ghost:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.button-small {
+  padding: 0.375rem 0.875rem;
+  font-size: 0.8125rem;
+}
+
+/* ---------- Barra de navegación translúcida ---------- */
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  background: rgb(0 0 0 / 0.64);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max);
+  height: 3.25rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo {
+  height: 0.9375rem;
+  width: auto;
+  color: var(--fg);
+}
+
+.logo-tag {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+}
+
+.nav-links a:not(.button) {
+  color: var(--muted);
+  transition: color 200ms var(--ease-out);
+}
+
+.nav-links a:not(.button):hover {
+  color: var(--fg);
+}
+
+/* ---------- Secciones ---------- */
+main {
+  overflow: clip;
+}
+
+.section {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: clamp(5rem, 12vw, 9rem) var(--gutter);
+  text-align: center;
+}
+
+.section .lede {
+  margin-top: 1.5rem;
+}
+
+.section .eyebrow {
+  margin-bottom: 1.25rem;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 100svh;
+  padding: 8rem var(--gutter) 0;
+  text-align: center;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: auto 0 -10% 0;
+  height: 70%;
+  background:
+    radial-gradient(
+      40% 50% at 40% 70%,
+      color-mix(in srgb, var(--magenta) 40%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      45% 55% at 62% 78%,
+      color-mix(in srgb, var(--brand) 45%, transparent),
+      transparent 70%
+    );
+  filter: blur(40px);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent);
+  pointer-events: none;
+}
+
+.hero-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 36rem);
+  margin-top: clamp(2rem, 6vw, 4rem);
+}
+
+.hero-mark {
+  position: relative;
+  width: clamp(6rem, 18vw, 10rem);
+  height: auto;
+  color: var(--fg);
+  filter: drop-shadow(0 1.5rem 3rem rgb(0 175 216 / 0.45));
+}
+
+/* Ecualizador: barras que suben y bajan detrás del isotipo */
+.equalizer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.25rem, 1vw, 0.5rem);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent);
+  opacity: 0.55;
+}
+
+.equalizer span {
+  width: clamp(0.25rem, 0.8vw, 0.4rem);
+  height: 100%;
+  border-radius: 999px;
+  background: var(--gradient);
+  background-size: 100% 300%;
+  transform: scaleY(0.25);
+  animation: eq 1.2s var(--ease-out) infinite alternate;
+}
+
+@keyframes eq {
+  to {
+    transform: scaleY(0.9);
+  }
+}
+
+/* ---------- Mosaico de servicios (bento) ---------- */
+.services .headline {
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.bento li {
+  display: flex;
+}
+
+.bento li.wide {
+  grid-column: span 2;
+}
+
+.tile {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  min-height: 16rem;
+  padding: 2rem;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(
+      120% 80% at 100% 0%,
+      color-mix(in srgb, var(--brand) 16%, transparent),
+      transparent 60%
+    ),
+    var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.tile-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: auto;
+  border-radius: 0.875rem;
+  background: rgb(0 175 216 / 0.12);
+  color: var(--brand);
+}
+
+.tile h3 {
+  margin-top: 1.5rem;
+  font-size: clamp(1.375rem, 2.6vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.tile p {
+  max-width: 36ch;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.tile-link {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.tile-link:hover {
+  color: var(--brand-hover);
+}
+
+/* ---------- Pasos ---------- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.step {
+  height: 100%;
+  padding: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.step-number {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.step h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.step p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+}
+
+/* ---------- Nosotros ---------- */
+.about-card {
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  border-radius: calc(var(--radius) * 1.25);
+  background:
+    radial-gradient(
+      70% 90% at 0% 100%,
+      color-mix(in srgb, var(--magenta) 22%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      70% 90% at 100% 0%,
+      color-mix(in srgb, var(--brand) 22%, transparent),
+      transparent 60%
+    ),
+    var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: clamp(2.5rem, 6vw, 3.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.pillars li {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.pillars h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+}
+
+.pillars p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+/* ---------- Llamado final ---------- */
+.cta .actions {
+  margin-top: 2rem;
+}
+
+/* ---------- Pie de página ---------- */
+.footer {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: 3rem var(--gutter) calc(2rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-brand p {
+  margin-top: 0.75rem;
+}
+
+.footer-logo {
+  height: 1.25rem;
+  width: auto;
+  color: var(--fg);
+}
+
+.footer-links,
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links a,
+.social a {
+  transition: color 200ms var(--ease-out);
+}
+
+.footer-links a:hover,
+.social a:hover {
+  color: var(--fg);
+}
+
+.social {
+  gap: 1rem;
+}
+
+.social a {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.footer-legal {
+  margin-top: 2.5rem;
+  font-size: 0.8125rem;
+}
+
+/* ---------- Aparición suave al hacer scroll ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 700ms var(--ease-out),
+    transform 700ms var(--ease-out);
+}
+
+[data-reveal][data-visible] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 760px) {
+  .hide-sm {
+    display: none;
+  }
+
+  .bento,
+  .steps,
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .bento li.wide {
+    grid-column: auto;
+  }
+
+  .tile {
+    min-height: 13rem;
+  }
+
+  .step {
+    padding: 1.5rem 0;
+  }
+}
+
+/* ---------- Movimiento reducido: sin desplazamientos ni animaciones ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    transform: none;
+    transition: opacity 300ms ease;
+  }
+
+  .equalizer span {
+    animation: none;
+    transform: scaleY(0.5);
+  }
+
+  .button:active {
+    transform: none;
+  }
+}

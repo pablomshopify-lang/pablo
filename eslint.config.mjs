@@ -30,5 +30,11 @@ export default defineConfig([
     },
   },
   prettier,
-  globalIgnores(['.next/**', 'out/**', 'node_modules/**', 'next-env.d.ts']),
+  globalIgnores([
+    '.next/**',
+    'out/**',
+    'node_modules/**',
+    'next-env.d.ts',
+    'mvck-music/**',
+  ]),
 ]);
