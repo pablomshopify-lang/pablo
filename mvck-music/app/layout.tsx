@@ -21,7 +21,7 @@ const display = Unbounded({
 export const metadata: Metadata = {
   title: 'Mvck Music · Distribución musical',
   description:
-    'Distribución musical boutique: conectamos tu música con el mundo con atención personal. Distribución digital, publishing, marketing y gestión de canales para artistas independientes.',
+    'Distribución musical boutique: conectamos tu música con el mundo con atención personal. Distribución digital, publishing, marketing, derechos digitales y regalías para artistas y sellos independientes.',
   openGraph: {
     title: 'Mvck Music · Distribución musical',
     description: 'Tu música, en todo el mundo.',

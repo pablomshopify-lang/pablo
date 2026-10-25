@@ -27,8 +27,8 @@ const SERVICES: Service[] = [
     href: LINKS.publishing,
   },
   {
-    title: 'Marketing',
-    text: 'Estrategias de marketing digital para que tu audiencia crezca lanzamiento a lanzamiento.',
+    title: 'Marketing y promoción',
+    text: 'Planes de lanzamiento, presentación a playlists y estrategias digitales para que tu audiencia crezca.',
     icon: <ChartIcon />,
     wide: false,
   },
@@ -36,6 +36,18 @@ const SERVICES: Service[] = [
     title: 'Gestión de canales',
     text: 'Administramos tus canales y tiendas digitales para que tú solo te preocupes de crear.',
     icon: <ChannelsIcon />,
+    wide: true,
+  },
+  {
+    title: 'Derechos digitales',
+    text: 'Protegemos tu música en YouTube y redes sociales, y cobramos cuando otros la usan.',
+    icon: <LockIcon />,
+    wide: false,
+  },
+  {
+    title: 'Reportes y regalías',
+    text: 'Ve cuánto suena tu música y cuánto genera, con reportes claros y pagos transparentes.',
+    icon: <ReportIcon />,
     wide: true,
   },
 ];
@@ -95,8 +107,8 @@ export default function Home() {
           </Reveal>
           <Reveal delay={160}>
             <p className="lede">
-              Descubre la plataforma que conecta tu música con el mundo, con la
-              atención personal de un servicio boutique.
+              Servicios de distribución y sello para artistas y sellos
+              independientes, con la atención personal de un servicio boutique.
             </p>
           </Reveal>
           <Reveal delay={240} className="actions">
@@ -270,7 +282,8 @@ export default function Home() {
           </ul>
         </div>
         <p className="footer-legal">
-          © {year} Mvck Music. Todos los derechos reservados.
+          © {year} Maverick Music Entertainment LLC. Todos los derechos
+          reservados.
         </p>
       </footer>
     </>
@@ -337,6 +350,24 @@ function ChannelsIcon() {
     <Icon>
       <rect x="3" y="4" width="18" height="12" rx="2" />
       <path d="m10 8 4 2-4 2V8ZM8 20h8" />
+    </Icon>
+  );
+}
+
+function LockIcon() {
+  return (
+    <Icon>
+      <rect x="4" y="10" width="16" height="11" rx="2" />
+      <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+    </Icon>
+  );
+}
+
+function ReportIcon() {
+  return (
+    <Icon>
+      <path d="M6 3h9l4 4v14H6V3Z" />
+      <path d="M14 3v5h5M9 17v-3M12 17v-5M15 17v-2" />
     </Icon>
   );
 }
