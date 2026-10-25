@@ -36,5 +36,6 @@ export default defineConfig([
     'node_modules/**',
     'next-env.d.ts',
     'mvck-music/**',
+    'mvck-publishing/**',
   ]),
 ]);
