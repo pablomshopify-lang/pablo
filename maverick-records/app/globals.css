@@ -9,6 +9,18 @@
   --muted: #8a8a8a;
   --line: rgb(255 255 255 / 0.1);
   --outline: rgb(255 255 255 / 0.16);
+  /* Degradado de la marca (firma de Maverick Music Entertainment) */
+  --cyan: #00add8;
+  --indigo: #2e2f82;
+  --violet: #642580;
+  --magenta: #e10082;
+  --brand-gradient: linear-gradient(
+    90deg,
+    var(--cyan),
+    var(--indigo),
+    var(--violet),
+    var(--magenta)
+  );
   --radius: 1.75rem;
   --gutter: max(1.25rem, env(safe-area-inset-left, 0px));
   --max: 72rem;
@@ -58,8 +70,129 @@ body::after {
 }
 
 ::selection {
-  background: var(--fg);
-  color: #000;
+  background: var(--magenta);
+  color: #fff;
+}
+
+/* ---------- Destellos de color ---------- */
+/* Texto con el degradado de la marca, que fluye despacio */
+.gradient-text {
+  background: linear-gradient(
+      90deg,
+      var(--cyan),
+      #7b6cff,
+      var(--magenta),
+      #ff5fb8,
+      var(--cyan)
+    )
+    0 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: flow 8s linear infinite;
+}
+
+@keyframes flow {
+  to {
+    background-position: -300% 0;
+  }
+}
+
+/* Manchas de luz que flotan */
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-blob {
+  position: absolute;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.42;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.aurora-cyan {
+  left: -14vmax;
+  top: 8%;
+  background: radial-gradient(closest-side, var(--cyan), transparent);
+  animation: float-a 18s ease-in-out infinite alternate;
+}
+
+.aurora-violet {
+  left: 30%;
+  bottom: -26vmax;
+  background: radial-gradient(closest-side, #5b2bd6, transparent);
+  animation: float-b 22s ease-in-out infinite alternate;
+}
+
+.aurora-magenta {
+  right: -14vmax;
+  top: -12vmax;
+  background: radial-gradient(closest-side, var(--magenta), transparent);
+  animation: float-c 20s ease-in-out infinite alternate;
+}
+
+.aurora-soft {
+  mask-image: linear-gradient(transparent, #000 25%, #000 75%, transparent);
+}
+
+.aurora-soft .aurora-blob {
+  opacity: 0.28;
+}
+
+@keyframes float-a {
+  to {
+    transform: translate3d(18vw, 10vh, 0) scale(1.15);
+  }
+}
+
+@keyframes float-b {
+  to {
+    transform: translate3d(-16vw, -14vh, 0) scale(0.9);
+  }
+}
+
+@keyframes float-c {
+  to {
+    transform: translate3d(-20vw, 16vh, 0) scale(1.1);
+  }
+}
+
+/* Ecualizador */
+.eq {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(2px, 0.4vw, 6px);
+  height: clamp(3.5rem, 9vw, 6.5rem);
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 18%,
+    #000 82%,
+    transparent
+  );
+}
+
+.eq span {
+  flex: 1;
+  max-width: 0.5rem;
+  border-radius: 999px;
+  transform-origin: 50% 100%;
+  opacity: 0.85;
+  animation: eq ease-in-out infinite alternate;
+}
+
+@keyframes eq {
+  from {
+    transform: scaleY(0.18);
+  }
 }
 
 h1,
@@ -92,7 +225,7 @@ strong {
   inset: 0 0 auto;
   z-index: 30;
   height: 2px;
-  background: linear-gradient(90deg, var(--gray), var(--fg));
+  background: var(--brand-gradient);
   transform: scaleX(0);
   transform-origin: 0 50%;
   pointer-events: none;
@@ -163,7 +296,7 @@ strong {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--fg);
+  background: var(--magenta);
 }
 
 .pulse::after {
@@ -217,7 +350,9 @@ strong {
 
 .button:hover {
   background: #fff;
-  box-shadow: 0 0 2.5rem rgb(255 255 255 / 0.18);
+  box-shadow:
+    -0.75rem 0 2.5rem rgb(0 173 216 / 0.35),
+    0.75rem 0 2.5rem rgb(225 0 130 / 0.35);
 }
 
 .button:active {
@@ -466,7 +601,22 @@ main {
   text-align: center;
 }
 
-.hero-inner > :not(.shadows, .hero-light, .hero-outline, .scroll-hint) {
+.hero-eq {
+  position: absolute;
+  inset: auto 0 0;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.hero-inner
+  > :not(
+    .aurora,
+    .shadows,
+    .hero-light,
+    .hero-outline,
+    .scroll-hint,
+    .hero-eq
+  ) {
   position: relative;
 }
 
@@ -569,8 +719,9 @@ main {
 /* Indicador para bajar */
 .scroll-hint {
   position: absolute;
-  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  bottom: calc(clamp(4.5rem, 10vw, 7.5rem) + env(safe-area-inset-bottom, 0px));
   left: 50%;
+  z-index: 1;
   display: grid;
   place-items: start center;
   width: 1.5rem;
@@ -652,7 +803,11 @@ main {
 .marquee-mark {
   width: auto;
   height: 0.55em;
-  color: var(--gray);
+  color: var(--cyan);
+}
+
+.marquee-row li:nth-child(even) .marquee-mark {
+  color: var(--magenta);
 }
 
 @keyframes marquee {
@@ -747,7 +902,8 @@ main {
 .pillar-tab-fill {
   display: block;
   height: 100%;
-  background: var(--fg);
+  background: var(--accent);
+  box-shadow: 0 0 0.75rem var(--accent);
   transform: scaleX(0);
   transform-origin: 0 50%;
 }
@@ -769,12 +925,18 @@ main {
   overflow: hidden;
   background:
     radial-gradient(
-      90% 80% at 100% 0%,
-      rgb(255 255 255 / 0.07),
-      transparent 60%
+      70% 80% at 100% 0%,
+      color-mix(in srgb, var(--accent) 32%, transparent),
+      transparent 65%
+    ),
+    radial-gradient(
+      60% 60% at 0% 100%,
+      color-mix(in srgb, var(--accent) 12%, transparent),
+      transparent 70%
     ),
     var(--surface);
   box-shadow: inset 0 0 0 1px var(--line);
+  transition: background 600ms var(--ease-out);
 }
 
 .pillar-outline {
@@ -818,7 +980,15 @@ main {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--accent) 65%, #fff);
+}
+
+.pillar-points svg {
+  color: color-mix(in srgb, var(--accent) 60%, #fff);
+}
+
+.pillar-tab[aria-selected='true'] .pillar-tab-number {
+  color: color-mix(in srgb, var(--accent) 65%, #fff);
 }
 
 .pillar-title {
@@ -939,7 +1109,7 @@ main {
 .tile::before {
   background: radial-gradient(
     22rem circle at var(--x, 50%) var(--y, 50%),
-    rgb(255 255 255 / 0.08),
+    color-mix(in srgb, var(--tone) 16%, transparent),
     transparent 60%
   );
 }
@@ -948,7 +1118,7 @@ main {
   padding: 1px;
   background: radial-gradient(
     16rem circle at var(--x, 50%) var(--y, 50%),
-    rgb(255 255 255 / 0.55),
+    color-mix(in srgb, var(--tone) 90%, #fff),
     transparent 60%
   );
   mask:
@@ -979,10 +1149,27 @@ main {
   width: 3rem;
   height: 3rem;
   border-radius: 0.875rem;
-  background: rgb(255 255 255 / 0.08);
-  box-shadow: inset 0 0 0 1px var(--line);
-  color: var(--fg);
+  background: color-mix(in srgb, var(--tone) 18%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 35%, transparent);
+  color: color-mix(in srgb, var(--tone) 70%, #fff);
   transition: transform 500ms var(--ease-spring);
+}
+
+/* Cada servicio con un color del degradado */
+.bento li {
+  --tone: var(--cyan);
+}
+
+.bento li:nth-child(2) {
+  --tone: #6d5cff;
+}
+
+.bento li:nth-child(3) {
+  --tone: #a63bd1;
+}
+
+.bento li:nth-child(4) {
+  --tone: var(--magenta);
 }
 
 .tile:hover .tile-icon {
@@ -1037,8 +1224,11 @@ main {
   width: 2.5rem;
   height: 2.5rem;
   margin-bottom: 1.5rem;
+  border: 1px solid transparent;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    var(--brand-gradient) border-box;
   font-size: 0.875rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -1133,13 +1323,14 @@ main {
 
 .family-card:hover .family-arrow {
   transform: rotate(45deg);
-  background: var(--fg);
-  color: #000;
+  background: linear-gradient(135deg, var(--cyan), var(--magenta));
+  color: #fff;
 }
 
 /* ---------- Llamado final ---------- */
 .cta-wrap {
   position: relative;
+  overflow: hidden;
   border-top: 1px solid var(--line);
 }
 
@@ -1147,38 +1338,13 @@ main {
   padding-block: clamp(7rem, 16vw, 12rem);
 }
 
-.cta > :not(.shadows, .hero-light) {
+.cta > :not(.aurora, .shadows, .hero-light) {
   position: relative;
 }
 
 .cta-title {
   font-size: clamp(2.5rem, 8vw, 6.5rem);
   line-height: 0.95;
-}
-
-/* Brillo que recorre el texto */
-.shine {
-  background: linear-gradient(
-      100deg,
-      var(--fg) 40%,
-      #fff 50%,
-      var(--gray) 60%,
-      var(--fg) 70%
-    )
-    0 0 / 250% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shine 5s ease-in-out infinite;
-}
-
-@keyframes shine {
-  from {
-    background-position: 100% 0;
-  }
-  to {
-    background-position: -150% 0;
-  }
 }
 
 .cta .actions {
@@ -1343,8 +1509,10 @@ main {
   }
 
   .shadows,
+  .aurora-blob,
+  .eq span,
+  .gradient-text,
   .marquee-track,
-  .shine,
   .pulse::after,
   .scroll-hint span {
     animation: none;

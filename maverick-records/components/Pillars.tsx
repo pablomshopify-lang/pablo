@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { KeyboardEvent, ReactNode } from 'react';
+import type { CSSProperties, KeyboardEvent, ReactNode } from 'react';
 import { IsotypeOutline } from '@/components/Logo';
 
 export type Pillar = {
@@ -14,6 +14,9 @@ export type Pillar = {
   text: ReactNode;
   points: readonly string[];
 };
+
+/** Color de acento de cada pestaña, del degradado de la marca. */
+const ACCENTS = ['var(--cyan)', 'var(--violet)', 'var(--magenta)'] as const;
 
 /** Tiempo que se muestra cada pestaña antes de pasar sola a la siguiente. */
 const AUTOPLAY_MS = 7000;
@@ -81,6 +84,7 @@ export function Pillars({ pillars }: { pillars: readonly Pillar[] }) {
     <div
       ref={rootRef}
       className="pillars"
+      style={{ '--accent': ACCENTS[active % ACCENTS.length] } as CSSProperties}
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}

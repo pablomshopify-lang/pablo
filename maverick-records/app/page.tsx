@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react';
+import { Aurora } from '@/components/Aurora';
+import { Equalizer } from '@/components/Equalizer';
 import { IsotypeOutline, Logo } from '@/components/Logo';
 import { Marquee } from '@/components/Marquee';
 import { Nav } from '@/components/Nav';
@@ -122,6 +124,7 @@ export default function Home() {
       <main>
         <Spotlight className="hero">
           <section className="hero-inner" aria-labelledby="hero-title">
+            <Aurora />
             <div className="shadows" aria-hidden="true" />
             <div className="hero-light" aria-hidden="true" />
             <IsotypeOutline className="hero-outline" draw strokeWidth={0.5} />
@@ -134,10 +137,14 @@ export default function Home() {
               {HERO_LINES.map((line, i) => (
                 <span
                   key={line}
-                  className={`intro hero-line${i === HERO_LINES.length - 1 ? ' bright' : ''}`}
+                  className="intro hero-line"
                   style={{ animationDelay: `${120 + i * 120}ms` }}
                 >
-                  {line}
+                  {i === HERO_LINES.length - 1 ? (
+                    <span className="gradient-text">{line}</span>
+                  ) : (
+                    line
+                  )}
                 </span>
               ))}
             </h1>
@@ -158,6 +165,7 @@ export default function Home() {
             <a href="#nosotros" className="scroll-hint" aria-label="Bajar">
               <span />
             </a>
+            <Equalizer className="hero-eq" />
           </section>
         </Spotlight>
 
@@ -265,6 +273,7 @@ export default function Home() {
         </section>
 
         <Spotlight className="cta-wrap">
+          <Aurora className="aurora-soft" />
           <section
             id="contacto"
             className="section cta"
@@ -276,7 +285,7 @@ export default function Home() {
               <h2 id="cta-title" className="headline cta-title">
                 ¿Haces música
                 <br />
-                <span className="shine">a tu manera?</span>
+                <span className="gradient-text">a tu manera?</span>
               </h2>
             </Reveal>
             <Reveal delay={100}>
