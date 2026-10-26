@@ -8,3 +8,8 @@ export const LINKS = {
   mvckPublishing: 'https://www.mvckpublishing.com',
   maverickLive: 'https://maverick-live1.vercel.app',
 } as const;
+
+/** Abre el correo con el asunto ya escrito, para que enviar música sea un clic. */
+export const DEMO_MAILTO = `mailto:${LINKS.email}?subject=${encodeURIComponent(
+  'Música para Maverick Records',
+)}`;

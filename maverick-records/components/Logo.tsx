@@ -38,11 +38,24 @@ export function Isotype(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+type OutlineProps = SVGProps<SVGSVGElement> & {
+  /**
+   * Prepara el trazo para dibujarse con una animación. El grosor pasa a
+   * medirse en unidades del dibujo, porque la animación necesita escalar.
+   */
+  draw?: boolean;
+};
+
 /** El isotipo solo con contorno, como en las piezas de Instagram del sello. */
 export function IsotypeOutline({
   strokeWidth = 1.5,
+  draw = false,
   ...props
-}: SVGProps<SVGSVGElement>) {
+}: OutlineProps) {
+  const pathProps = draw
+    ? { pathLength: 1 }
+    : { vectorEffect: 'non-scaling-stroke' as const };
+
   return (
     <svg
       viewBox="126 178 298 210"
@@ -54,11 +67,11 @@ export function IsotypeOutline({
     >
       <path
         d="M 341.24 183.06 L 341.24 251.61 L 341.12 251.61 L 341.12 315.24 L 341.24 315.24 L 341.24 383.79 L 419.50 383.79 L 419.50 183.06 Z M 341.24 183.06"
-        vectorEffect="non-scaling-stroke"
+        {...pathProps}
       />
       <path
         d="M 234.85 183.06 L 130.65 183.06 L 234.75 283.42 L 130.65 383.79 L 234.85 383.79 L 288.42 333.42 L 341.57 283.42 Z M 234.85 183.06"
-        vectorEffect="non-scaling-stroke"
+        {...pathProps}
       />
     </svg>
   );

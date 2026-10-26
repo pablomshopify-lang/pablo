@@ -8,14 +8,24 @@ Sitio de **Maverick Records** (sello musical independiente del Holding MVCK) en 
 app/
   layout.tsx       Letra (Outfit) y título de la pestaña
   page.tsx         Textos y secciones de la página
-  globals.css      Colores, tamaños y animaciones (variables al inicio del archivo)
+  globals.css      Colores (degradado celeste, violeta y magenta), tamaños y animaciones
 components/
   Logo.tsx         Logotipo e isotipo, tomados de "Logotipo Maverick RGB.pdf"
-  Nav.tsx          Barra de arriba, translúcida
+  Nav.tsx          Barra de arriba: se esconde al bajar y tiene menú para celular
+  Pillars.tsx      Los 3 textos del sello en pestañas que avanzan solas
+  Marquee.tsx      Cinta de palabras que se desliza
+  Spotlight.tsx    Luz suave que sigue al mouse (portada y tarjetas)
+  Aurora.tsx       Manchas de luz de colores que flotan (portada y contacto)
+  Equalizer.tsx    Ecualizador animado con el degradado de la marca
   Reveal.tsx       Animación suave al aparecer cada sección
 lib/
   links.ts         Enlaces: correo, Instagram, marcas del holding
 ```
+
+## Animaciones
+
+Todas respetan la opción del sistema **Reducir movimiento**: si alguien la tiene activada,
+la página se ve completa y quieta.
 
 ## Probar en tu computador
 
