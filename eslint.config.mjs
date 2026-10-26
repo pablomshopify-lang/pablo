@@ -37,5 +37,6 @@ export default defineConfig([
     'next-env.d.ts',
     'mvck-music/**',
     'mvck-publishing/**',
+    'maverick-records/**',
   ]),
 ]);
