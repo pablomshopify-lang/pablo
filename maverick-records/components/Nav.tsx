@@ -6,10 +6,10 @@ import { Logo } from '@/components/Logo';
 import { DEMO_MAILTO } from '@/lib/links';
 
 const SECTIONS = [
-  { href: '#quienes-somos', label: 'Quiénes somos' },
-  { href: '#que-hacemos', label: 'Qué hacemos' },
-  { href: '#compromiso', label: 'Compromiso' },
+  { href: '#nosotros', label: 'Nosotros' },
   { href: '#servicios', label: 'Servicios' },
+  { href: '#proceso', label: 'Cómo trabajamos' },
+  { href: '#contacto', label: 'Contacto' },
 ] as const;
 
 /**

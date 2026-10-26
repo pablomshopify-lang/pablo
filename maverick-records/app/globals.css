@@ -661,109 +661,208 @@ main {
   }
 }
 
-/* ---------- Manifiesto: frase fija que se ilumina con el scroll ---------- */
-.manifesto {
-  position: relative;
+/* ---------- El sello: tres pestañas interactivas ---------- */
+.about .headline {
+  max-width: 18ch;
+  margin-inline: auto;
 }
 
-.manifesto-anchor {
-  position: absolute;
-  left: 0;
-}
-
-.manifesto-sticky {
-  position: sticky;
-  top: 0;
+.pillars {
   display: grid;
-  place-items: center;
-  height: 100svh;
-  padding-inline: var(--gutter);
-  overflow: hidden;
+  grid-template-columns: minmax(15rem, 20rem) 1fr;
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  text-align: left;
 }
 
-.manifesto-outline {
+.pillar-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pillar-tab {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.25rem 1rem;
+  width: 100%;
+  padding: 1.25rem 1.25rem 1.5rem;
+  border: 0;
+  border-radius: 1.25rem;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 300ms var(--ease-out),
+    color 300ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+
+.pillar-tab:hover {
+  color: var(--fg);
+  background: rgb(255 255 255 / 0.03);
+}
+
+.pillar-tab:active {
+  transform: scale(0.98);
+}
+
+.pillar-tab[aria-selected='true'] {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--fg);
+}
+
+.pillar-tab-number {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.pillar-tab-label {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Barra que muestra cuánto falta para pasar a la siguiente pestaña */
+.pillar-tab-bar {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(110vw, 52rem);
+  inset: auto 1.25rem 0.75rem;
+  height: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.pillar-tab[aria-selected='true'] .pillar-tab-bar {
+  background: rgb(255 255 255 / 0.1);
+}
+
+.pillar-tab-fill {
+  display: block;
+  height: 100%;
+  background: var(--fg);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.pillar-tab-fill[data-running] {
+  animation: grow linear forwards;
+}
+
+.pillar-tab-fill[data-done] {
+  transform: scaleX(1);
+}
+
+.pillar-stage {
+  position: relative;
+  display: grid;
+  min-height: 26rem;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background:
+    radial-gradient(
+      90% 80% at 100% 0%,
+      rgb(255 255 255 / 0.07),
+      transparent 60%
+    ),
+    var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.pillar-outline {
+  position: absolute;
+  right: -12%;
+  bottom: -18%;
+  width: min(80%, 30rem);
   height: auto;
-  translate: -50% -50%;
   color: var(--outline);
   pointer-events: none;
 }
 
-.manifesto-dots {
-  position: absolute;
-  right: var(--gutter);
-  top: 50%;
-  display: grid;
-  gap: 0.75rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  translate: 0 -50%;
-}
-
-.manifesto-dots li {
-  width: 0.375rem;
-  height: 0.375rem;
-  border-radius: 1rem;
-  background: rgb(255 255 255 / 0.25);
-  transition:
-    height 500ms var(--ease-spring),
-    background-color 300ms var(--ease-out);
-}
-
-.manifesto-dots li[data-active] {
-  height: 1.75rem;
-  background: var(--fg);
-}
-
-.manifesto-item {
+.pillar-panel {
+  position: relative;
   grid-area: 1 / 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  max-width: 56rem;
-  text-align: center;
-  transition:
-    opacity 600ms var(--ease-out),
-    transform 800ms var(--ease-out),
-    filter 600ms var(--ease-out);
+  justify-content: center;
 }
 
-.manifesto-item[data-state='next'] {
-  opacity: 0;
-  transform: translateY(3rem);
-  filter: blur(8px);
-  pointer-events: none;
+/* Los tres paneles ocupan el mismo lugar: la caja mide lo del más alto y no salta */
+.pillar-panel[hidden] {
+  display: flex;
+  visibility: hidden;
 }
 
-.manifesto-item[data-state='past'] {
-  opacity: 0;
-  transform: translateY(-3rem) scale(0.98);
-  filter: blur(8px);
-  pointer-events: none;
+.pillar-panel:not([hidden]) {
+  animation: panel 600ms var(--ease-out) both;
 }
 
-.manifesto-number {
-  display: block;
-  margin-top: clamp(2.5rem, 7vw, 4.5rem);
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 600;
+@keyframes panel {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    filter: blur(6px);
+  }
 }
 
-.statement {
-  margin-top: 1rem;
-  max-width: 26ch;
-  font-size: clamp(1.75rem, 4.8vw, 3.5rem);
-  font-weight: 300;
-  line-height: 1.18;
+.pillar-kicker {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pillar-title {
+  margin-top: 0.75rem;
+  font-size: clamp(2rem, 4.4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
-.word {
-  transition: opacity 250ms linear;
+.pillar-text {
+  max-width: 34ch;
+  margin-top: 1.25rem;
+  font-size: clamp(1.125rem, 2vw, 1.3125rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: #c9c9c9;
+  text-wrap: pretty;
+}
+
+.pillar-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pillar-points li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.pillar-panel:not([hidden]) .pillar-points li {
+  animation: rise 500ms var(--ease-out) both;
 }
 
 /* ---------- Secciones ---------- */
@@ -1191,8 +1290,34 @@ main {
     min-height: 14rem;
   }
 
-  .manifesto-dots {
-    right: 0.75rem;
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+
+  /* En celular las pestañas van en fila, arriba del contenido */
+  .pillar-tabs {
+    flex-direction: row;
+    gap: 0.375rem;
+  }
+
+  .pillar-tab {
+    flex: 1;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    padding: 0.875rem 0.875rem 1.25rem;
+  }
+
+  .pillar-tab-label {
+    font-size: 0.875rem;
+    line-height: 1.2;
+  }
+
+  .pillar-tab-bar {
+    inset: auto 0.875rem 0.625rem;
+  }
+
+  .pillar-stage {
+    min-height: 0;
   }
 
   .hero-inner .actions {
@@ -1236,16 +1361,13 @@ main {
     transition: opacity 300ms ease;
   }
 
-  .manifesto-item {
-    transform: none !important;
-    filter: none !important;
-  }
-
-  .word {
-    opacity: 1 !important;
+  .pillar-panel:not([hidden]),
+  .pillar-panel:not([hidden]) .pillar-points li {
+    animation: fade 300ms ease both;
   }
 
   .button:active,
+  .pillar-tab:active,
   .family-card:active,
   .tile[data-visible]:hover,
   .tile:hover .tile-icon,

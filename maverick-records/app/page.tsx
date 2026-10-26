@@ -1,46 +1,51 @@
 import type { ReactNode } from 'react';
 import { IsotypeOutline, Logo } from '@/components/Logo';
-import { Manifesto } from '@/components/Manifesto';
-import type { ManifestoItem } from '@/components/Manifesto';
 import { Marquee } from '@/components/Marquee';
 import { Nav } from '@/components/Nav';
+import { Pillars } from '@/components/Pillars';
+import type { Pillar } from '@/components/Pillars';
 import { Reveal } from '@/components/Reveal';
 import { Spotlight } from '@/components/Spotlight';
 import { DEMO_MAILTO, LINKS } from '@/lib/links';
 
-/** Los tres textos del sello, tal como aparecen en su Instagram. */
-const MANIFESTO: ManifestoItem[] = [
+/** Los tres textos del sello (Instagram), con su idea principal y puntos clave. */
+const PILLARS: Pillar[] = [
   {
     id: 'quienes-somos',
-    title: '¿Quiénes somos?',
-    segments: [
-      { text: 'Somos un sello 100%' },
-      { text: 'independiente', strong: true },
-      { text: 'y' },
-      { text: 'disidente', strong: true },
-      { text: 'que valora la libertad creativa.' },
-    ],
+    label: '¿Quiénes somos?',
+    title: 'Independientes y disidentes.',
+    text: (
+      <>
+        Somos un sello 100% <strong>independiente</strong> y{' '}
+        <strong>disidente</strong> que valora la libertad creativa.
+      </>
+    ),
+    points: ['100% independiente', 'Sin moldes', 'Libertad creativa'],
   },
   {
     id: 'que-hacemos',
-    title: '¿Qué hacemos?',
-    segments: [
-      { text: 'Potenciamos las' },
-      { text: 'marcas', strong: true },
-      {
-        text: 'de nuestros artistas para producir, distribuir y promocionar su música.',
-      },
-    ],
+    label: '¿Qué hacemos?',
+    title: 'Potenciamos tu marca.',
+    text: (
+      <>
+        Potenciamos las <strong>marcas</strong> de nuestros artistas para
+        producir, distribuir y promocionar su música.
+      </>
+    ),
+    points: ['Producir', 'Distribuir', 'Promocionar'],
   },
   {
     id: 'compromiso',
-    title: 'Compromiso Maverick',
-    segments: [
-      {
-        text: 'Nuestra misión es apoyar el crecimiento de nuestros artistas bajo el apoyo de un equipo profesional respetando siempre su',
-      },
-      { text: 'libertad.', strong: true },
-    ],
+    label: 'Compromiso Maverick',
+    title: 'Crecer sin perder tu libertad.',
+    text: (
+      <>
+        Nuestra misión es apoyar el crecimiento de nuestros artistas bajo el
+        apoyo de un equipo profesional respetando siempre su{' '}
+        <strong>libertad</strong>.
+      </>
+    ),
+    points: ['Crecimiento real', 'Equipo profesional', 'Tu libertad, siempre'],
   },
 ];
 
@@ -145,12 +150,12 @@ export default function Home() {
                 Envía tu música
                 <ArrowIcon />
               </a>
-              <a href="#quienes-somos" className="button button-ghost">
+              <a href="#nosotros" className="button button-ghost">
                 Conócenos
               </a>
             </div>
 
-            <a href="#quienes-somos" className="scroll-hint" aria-label="Bajar">
+            <a href="#nosotros" className="scroll-hint" aria-label="Bajar">
               <span />
             </a>
           </section>
@@ -158,7 +163,24 @@ export default function Home() {
 
         <Marquee />
 
-        <Manifesto items={MANIFESTO} />
+        <section
+          id="nosotros"
+          className="section about"
+          aria-labelledby="nosotros-title"
+        >
+          <Reveal>
+            <p className="eyebrow">El sello</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 id="nosotros-title" className="headline">
+              Libertad creativa,{' '}
+              <span className="bright">con un equipo detrás.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={160}>
+            <Pillars pillars={PILLARS} />
+          </Reveal>
+        </section>
 
         <section
           id="servicios"
@@ -191,7 +213,11 @@ export default function Home() {
           </Spotlight>
         </section>
 
-        <section className="section process" aria-labelledby="proceso-title">
+        <section
+          id="proceso"
+          className="section process"
+          aria-labelledby="proceso-title"
+        >
           <Reveal>
             <p className="eyebrow">Cómo trabajamos</p>
           </Reveal>

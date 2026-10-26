@@ -12,7 +12,7 @@ app/
 components/
   Logo.tsx         Logotipo e isotipo, tomados de "Logotipo Maverick RGB.pdf"
   Nav.tsx          Barra de arriba: se esconde al bajar y tiene menú para celular
-  Manifesto.tsx    Los 3 textos del sello, que se iluminan palabra por palabra al hacer scroll
+  Pillars.tsx      Los 3 textos del sello en pestañas que avanzan solas
   Marquee.tsx      Cinta de palabras que se desliza
   Spotlight.tsx    Luz suave que sigue al mouse (portada y tarjetas)
   Reveal.tsx       Animación suave al aparecer cada sección
