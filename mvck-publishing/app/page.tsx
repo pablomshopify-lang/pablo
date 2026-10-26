@@ -144,20 +144,6 @@ export default function Home() {
           </Reveal>
           <Reveal delay={320} className="hero-visual">
             <Isotype className="hero-mark" />
-            <ul className="chips" aria-label="Ejemplos de regalías">
-              <li className="chip chip-1">
-                <span className="chip-dot" aria-hidden="true" />
-                Streaming · Mecánica
-              </li>
-              <li className="chip chip-2">
-                <span className="chip-dot" aria-hidden="true" />
-                Radio · Comunicación pública
-              </li>
-              <li className="chip chip-3">
-                <span className="chip-dot" aria-hidden="true" />
-                Radio digital · Máster
-              </li>
-            </ul>
           </Reveal>
         </section>
 

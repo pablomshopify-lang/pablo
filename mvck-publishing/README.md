@@ -16,13 +16,14 @@ components/
   Reveal.tsx       Animación suave al aparecer cada sección
 lib/
   links.ts         Enlaces: correo, redes sociales
-public/partners/   Aquí van los logos oficiales de las entidades
+public/partners/   Logos oficiales de las entidades
 ```
 
-## Poner los logos de las entidades
+## Cambiar un logo de las entidades
 
-1. Guarda cada logo (mejor en SVG) en `public/partners/`, por ejemplo `ascap.svg`.
-2. En `components/Partners.tsx` agrega `logo: '/partners/ascap.svg'` a esa entidad.
+1. Guarda el logo nuevo (mejor en SVG) en `public/partners/`.
+2. En `components/Partners.tsx` cambia `src`, `width` y `height` de esa entidad.
+   Los logos se muestran en blanco automáticamente.
 
 ## Probar en tu computador
 
