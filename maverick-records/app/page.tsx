@@ -1,64 +1,92 @@
 import type { ReactNode } from 'react';
 import { IsotypeOutline, Logo } from '@/components/Logo';
+import { Manifesto } from '@/components/Manifesto';
+import type { ManifestoItem } from '@/components/Manifesto';
+import { Marquee } from '@/components/Marquee';
 import { Nav } from '@/components/Nav';
 import { Reveal } from '@/components/Reveal';
-import { LINKS } from '@/lib/links';
+import { Spotlight } from '@/components/Spotlight';
+import { DEMO_MAILTO, LINKS } from '@/lib/links';
 
 /** Los tres textos del sello, tal como aparecen en su Instagram. */
-const MANIFESTO = [
+const MANIFESTO: ManifestoItem[] = [
   {
     id: 'quienes-somos',
     title: '¿Quiénes somos?',
-    text: (
-      <>
-        Somos un sello 100% <strong>independiente</strong> y{' '}
-        <strong>disidente</strong> que valora la libertad creativa.
-      </>
-    ),
+    segments: [
+      { text: 'Somos un sello 100%' },
+      { text: 'independiente', strong: true },
+      { text: 'y' },
+      { text: 'disidente', strong: true },
+      { text: 'que valora la libertad creativa.' },
+    ],
   },
   {
     id: 'que-hacemos',
     title: '¿Qué hacemos?',
-    text: (
-      <>
-        Potenciamos las <strong>marcas</strong> de nuestros artistas para
-        producir, distribuir y promocionar su música.
-      </>
-    ),
+    segments: [
+      { text: 'Potenciamos las' },
+      { text: 'marcas', strong: true },
+      {
+        text: 'de nuestros artistas para producir, distribuir y promocionar su música.',
+      },
+    ],
   },
   {
     id: 'compromiso',
     title: 'Compromiso Maverick',
-    text: (
-      <>
-        Nuestra misión es apoyar el crecimiento de nuestros artistas bajo el
-        apoyo de un equipo profesional respetando siempre su{' '}
-        <strong>libertad</strong>.
-      </>
-    ),
+    segments: [
+      {
+        text: 'Nuestra misión es apoyar el crecimiento de nuestros artistas bajo el apoyo de un equipo profesional respetando siempre su',
+      },
+      { text: 'libertad.', strong: true },
+    ],
   },
-] as const;
+];
 
 const SERVICES = [
   {
     title: 'Producir',
     text: 'Acompañamos cada lanzamiento desde el estudio: sonido, dirección y una identidad propia.',
     icon: <StudioIcon />,
+    wide: true,
   },
   {
     title: 'Distribuir',
-    text: 'Llevamos tu música a Spotify, Apple Music, YouTube y todas las plataformas del mundo.',
+    text: 'Tu música en Spotify, Apple Music, YouTube y todas las plataformas del mundo.',
     icon: <GlobeIcon />,
+    wide: false,
   },
   {
     title: 'Promocionar',
     text: 'Campañas, redes y prensa para que tu música llegue a quien tiene que escucharla.',
     icon: <MegaphoneIcon />,
+    wide: false,
   },
   {
     title: 'Marca de artista',
     text: 'Construimos tu marca contigo: imagen, discurso y una historia que se reconozca.',
     icon: <SparkIcon />,
+    wide: true,
+  },
+] as const;
+
+const STEPS = [
+  {
+    title: 'Envíanos tu música',
+    text: 'Un correo con tus canciones y quién eres. Sin formularios eternos.',
+  },
+  {
+    title: 'La escuchamos',
+    text: 'Nuestro equipo escucha cada propuesta con atención.',
+  },
+  {
+    title: 'Armamos tu plan',
+    text: 'Si hay match, definimos juntos producción, lanzamiento y promoción.',
+  },
+  {
+    title: 'Lanzamos',
+    text: 'Tu música sale al mundo con un equipo detrás, y tú sigues al mando.',
   },
 ] as const;
 
@@ -76,87 +104,113 @@ const FAMILY = [
   },
 ] as const;
 
+const HERO_LINES = ['Independientes.', 'Disidentes.', 'Libres.'] as const;
+
 export default function Home() {
   const year = new Date().getFullYear();
 
   return (
     <>
+      <div className="progress" aria-hidden="true" />
       <Nav />
 
       <main>
-        <section className="hero" aria-labelledby="hero-title">
-          <div className="shadows" aria-hidden="true" />
-          <IsotypeOutline className="hero-outline" />
-          <Reveal>
-            <p className="eyebrow">Sello discográfico independiente</p>
-          </Reveal>
-          <Reveal delay={80}>
+        <Spotlight className="hero">
+          <section className="hero-inner" aria-labelledby="hero-title">
+            <div className="shadows" aria-hidden="true" />
+            <div className="hero-light" aria-hidden="true" />
+            <IsotypeOutline className="hero-outline" draw strokeWidth={0.5} />
+
+            <p className="eyebrow intro" style={{ animationDelay: '0ms' }}>
+              <span className="pulse" aria-hidden="true" />
+              Sello discográfico independiente
+            </p>
             <h1 id="hero-title" className="display">
-              Independientes.
-              <br />
-              Disidentes.
-              <br />
-              <span className="bright">Libres.</span>
+              {HERO_LINES.map((line, i) => (
+                <span
+                  key={line}
+                  className={`intro hero-line${i === HERO_LINES.length - 1 ? ' bright' : ''}`}
+                  style={{ animationDelay: `${120 + i * 120}ms` }}
+                >
+                  {line}
+                </span>
+              ))}
             </h1>
-          </Reveal>
-          <Reveal delay={160}>
-            <p className="lede">
+            <p className="lede intro" style={{ animationDelay: '520ms' }}>
               Un sello que valora la <strong>libertad creativa</strong> y
               potencia la marca de cada uno de sus artistas.
             </p>
-          </Reveal>
-          <Reveal delay={240} className="actions">
-            <a href={`mailto:${LINKS.email}`} className="button">
-              Envía tu música
-            </a>
-            <a href="#quienes-somos" className="button button-ghost">
-              Conócenos
-            </a>
-          </Reveal>
-        </section>
+            <div className="actions intro" style={{ animationDelay: '620ms' }}>
+              <a href={DEMO_MAILTO} className="button">
+                Envía tu música
+                <ArrowIcon />
+              </a>
+              <a href="#quienes-somos" className="button button-ghost">
+                Conócenos
+              </a>
+            </div>
 
-        {MANIFESTO.map((item, i) => (
-          <section
-            key={item.id}
-            id={item.id}
-            className="section manifesto"
-            aria-labelledby={`${item.id}-title`}
-          >
-            <IsotypeOutline className="manifesto-outline" />
-            <Reveal>
-              <h2 id={`${item.id}-title`} className="headline">
-                {item.title}
-              </h2>
-            </Reveal>
-            <Reveal delay={100}>
-              <span className="manifesto-number">{i + 1}.</span>
-            </Reveal>
-            <Reveal delay={180}>
-              <p className="statement">{item.text}</p>
-            </Reveal>
+            <a href="#quienes-somos" className="scroll-hint" aria-label="Bajar">
+              <span />
+            </a>
           </section>
-        ))}
+        </Spotlight>
 
-        <section className="section services" aria-labelledby="servicios-title">
+        <Marquee />
+
+        <Manifesto items={MANIFESTO} />
+
+        <section
+          id="servicios"
+          className="section services"
+          aria-labelledby="servicios-title"
+        >
           <Reveal>
             <p className="eyebrow">Para nuestros artistas</p>
           </Reveal>
           <Reveal delay={80}>
             <h2 id="servicios-title" className="headline">
-              Todo lo que tu música necesita
+              Todo lo que tu música <span className="bright">necesita.</span>
             </h2>
           </Reveal>
-          <ul className="grid">
-            {SERVICES.map((service, i) => (
-              <li key={service.title}>
-                <Reveal className="tile" delay={i * 80}>
-                  <span className="tile-icon">{service.icon}</span>
-                  <h3>{service.title}</h3>
-                  <p>{service.text}</p>
+          <Spotlight className="bento-wrap" targets=".tile">
+            <ul className="bento">
+              {SERVICES.map((service, i) => (
+                <li key={service.title} className={service.wide ? 'wide' : ''}>
+                  <Reveal className="tile" delay={i * 80}>
+                    <div className="tile-top">
+                      <span className="tile-icon">{service.icon}</span>
+                      <span className="tile-index">0{i + 1}</span>
+                    </div>
+                    <h3>{service.title}</h3>
+                    <p>{service.text}</p>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </Spotlight>
+        </section>
+
+        <section className="section process" aria-labelledby="proceso-title">
+          <Reveal>
+            <p className="eyebrow">Cómo trabajamos</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 id="proceso-title" className="headline">
+              De tu demo <span className="bright">al mundo.</span>
+            </h2>
+          </Reveal>
+          <ol className="steps">
+            {STEPS.map((step, i) => (
+              <li key={step.title}>
+                <Reveal className="step" delay={i * 100}>
+                  <span className="step-number">0{i + 1}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
                 </Reveal>
               </li>
             ))}
-          </ul>
+          </ol>
         </section>
 
         <section className="section family" aria-labelledby="holding-title">
@@ -170,8 +224,13 @@ export default function Home() {
               <li key={brand.name}>
                 <Reveal delay={i * 80}>
                   <a href={brand.href} className="family-card">
-                    <span className="family-name">{brand.name}</span>
-                    <span className="family-role">{brand.role}</span>
+                    <span>
+                      <span className="family-name">{brand.name}</span>
+                      <span className="family-role">{brand.role}</span>
+                    </span>
+                    <span className="family-arrow" aria-hidden="true">
+                      <ArrowUpRightIcon />
+                    </span>
                   </a>
                 </Reveal>
               </li>
@@ -179,44 +238,51 @@ export default function Home() {
           </ul>
         </section>
 
-        <section
-          id="contacto"
-          className="section cta"
-          aria-labelledby="cta-title"
-        >
-          <div className="shadows" aria-hidden="true" />
-          <Reveal>
-            <h2 id="cta-title" className="headline">
-              ¿Haces música
-              <br />
-              <span className="bright">a tu manera?</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="lede">
-              Envíanos tu música y cuéntanos quién eres. Escuchamos todo.
-            </p>
-          </Reveal>
-          <Reveal delay={200} className="actions">
-            <a href={`mailto:${LINKS.email}`} className="button">
-              Escríbenos
-            </a>
-            <a href={LINKS.instagram} className="button button-ghost">
-              {LINKS.instagramHandle}
-            </a>
-          </Reveal>
-        </section>
+        <Spotlight className="cta-wrap">
+          <section
+            id="contacto"
+            className="section cta"
+            aria-labelledby="cta-title"
+          >
+            <div className="shadows" aria-hidden="true" />
+            <div className="hero-light" aria-hidden="true" />
+            <Reveal>
+              <h2 id="cta-title" className="headline cta-title">
+                ¿Haces música
+                <br />
+                <span className="shine">a tu manera?</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <p className="lede">
+                Envíanos tu música y cuéntanos quién eres. Escuchamos todo.
+              </p>
+            </Reveal>
+            <Reveal delay={200} className="actions">
+              <a href={DEMO_MAILTO} className="button button-large">
+                Envía tu música
+                <ArrowIcon />
+              </a>
+              <a href={LINKS.instagram} className="button button-ghost">
+                <InstagramIcon />
+                {LINKS.instagramHandle}
+              </a>
+            </Reveal>
+          </section>
+        </Spotlight>
       </main>
 
       <footer className="footer">
         <div className="footer-top">
-          <div className="footer-brand">
-            <Logo className="footer-logo" />
-            <p>Records · Parte del Holding MVCK</p>
-          </div>
+          <p className="footer-tagline">
+            Independientes. Disidentes. <span className="bright">Libres.</span>
+          </p>
           <ul className="footer-links" aria-label="Enlaces">
             <li>
               <a href={`mailto:${LINKS.email}`}>{LINKS.email}</a>
+            </li>
+            <li>
+              <a href={LINKS.instagram}>Instagram</a>
             </li>
             {FAMILY.map((brand) => (
               <li key={brand.name}>
@@ -224,14 +290,8 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <ul className="social" aria-label="Redes sociales">
-            <li>
-              <a href={LINKS.instagram} aria-label="Instagram">
-                <InstagramIcon />
-              </a>
-            </li>
-          </ul>
         </div>
+        <Logo className="footer-logo" aria-hidden="true" />
         <p className="footer-legal">
           © {year} Maverick Music Entertainment LLC. Todos los derechos
           reservados.
@@ -241,12 +301,12 @@ export default function Home() {
   );
 }
 
-function Icon({ children }: { children: ReactNode }) {
+function Icon({ children, size = 24 }: { children: ReactNode; size?: number }) {
   return (
     <svg
       viewBox="0 0 24 24"
-      width="24"
-      height="24"
+      width={size}
+      height={size}
       fill="none"
       stroke="currentColor"
       strokeWidth="1.75"
@@ -256,6 +316,24 @@ function Icon({ children }: { children: ReactNode }) {
     >
       {children}
     </svg>
+  );
+}
+
+function ArrowIcon() {
+  return (
+    <span className="button-arrow">
+      <Icon size={18}>
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </Icon>
+    </span>
+  );
+}
+
+function ArrowUpRightIcon() {
+  return (
+    <Icon size={20}>
+      <path d="M7 17 17 7M8 7h9v9" />
+    </Icon>
   );
 }
 
@@ -295,7 +373,7 @@ function SparkIcon() {
 
 function InstagramIcon() {
   return (
-    <Icon>
+    <Icon size={18}>
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />

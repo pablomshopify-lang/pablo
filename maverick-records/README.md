@@ -11,11 +11,19 @@ app/
   globals.css      Colores, tamaños y animaciones (variables al inicio del archivo)
 components/
   Logo.tsx         Logotipo e isotipo, tomados de "Logotipo Maverick RGB.pdf"
-  Nav.tsx          Barra de arriba, translúcida
+  Nav.tsx          Barra de arriba: se esconde al bajar y tiene menú para celular
+  Manifesto.tsx    Los 3 textos del sello, que se iluminan palabra por palabra al hacer scroll
+  Marquee.tsx      Cinta de palabras que se desliza
+  Spotlight.tsx    Luz suave que sigue al mouse (portada y tarjetas)
   Reveal.tsx       Animación suave al aparecer cada sección
 lib/
   links.ts         Enlaces: correo, Instagram, marcas del holding
 ```
+
+## Animaciones
+
+Todas respetan la opción del sistema **Reducir movimiento**: si alguien la tiene activada,
+la página se ve completa y quieta.
 
 ## Probar en tu computador
 
