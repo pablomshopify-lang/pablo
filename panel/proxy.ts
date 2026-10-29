@@ -10,7 +10,11 @@ import {
 // Renueva la sesión en cada visita y manda al login a quien no entró.
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const publica = pathname === '/login' || pathname === '/configurar';
+  // Login, configuración y los formularios de ingreso de artistas.
+  const publica =
+    pathname === '/login' ||
+    pathname === '/configurar' ||
+    pathname.startsWith('/ingreso/');
   if (!supabaseConfigurado()) {
     return publica
       ? NextResponse.next()
