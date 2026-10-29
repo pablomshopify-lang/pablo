@@ -446,3 +446,17 @@ export async function editarMiembro(f: FormData) {
   listo('/equipo');
   redirect('/equipo?ok=1');
 }
+
+export async function eliminarMiembro(f: FormData) {
+  const { esJefe, perfil } = await sesion();
+  if (!esJefe) fallar('/equipo', 'Solo admin o CEO pueden eliminar usuarios.');
+  const id = texto(f, 'id');
+  if (id === perfil.id) fallar('/equipo', 'No puedes eliminarte a ti mismo.');
+
+  // Borra el usuario de Supabase; su perfil se borra solo. Sus tareas, notas
+  // y contratos quedan, sin autor.
+  const { error } = await supabaseAdmin().auth.admin.deleteUser(id);
+  if (error) fallar('/equipo', 'No se pudo eliminar el usuario.');
+  listo('/equipo');
+  redirect('/equipo?ok=1');
+}

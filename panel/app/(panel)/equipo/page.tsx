@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { crearMiembro, editarMiembro } from '@/app/acciones';
+import { crearMiembro, editarMiembro, eliminarMiembro } from '@/app/acciones';
 import Aviso from '@/components/Aviso';
+import BotonConfirmar from '@/components/BotonConfirmar';
 import { AREAS, ROLES } from '@/lib/datos';
 import { equipo, sesion } from '@/lib/sesion';
 
@@ -100,6 +101,20 @@ export default async function Equipo({
                       <button className="suave chico">Guardar</button>
                     </div>
                   </form>
+                  {p.id !== perfil.id && (
+                    <form
+                      action={eliminarMiembro}
+                      style={{ marginTop: '0.75rem' }}
+                    >
+                      <input type="hidden" name="id" value={p.id} />
+                      <BotonConfirmar
+                        className="peligro chico"
+                        pregunta={`¿Eliminar a ${p.nombre}? Ya no podrá entrar al panel. Sus tareas y notas se mantienen.`}
+                      >
+                        Eliminar usuario
+                      </BotonConfirmar>
+                    </form>
+                  )}
                 </details>
               )}
             </li>
