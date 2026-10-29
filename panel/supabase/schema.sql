@@ -1,5 +1,5 @@
 -- =====================================================================
--- Panel central · Holding MVCK
+-- Panel central · Maverick Music Entertainment
 -- Base de datos de artistas, contratos y tareas de las 4 empresas.
 --
 -- Cómo usarlo: en Supabase abre «SQL Editor», pega TODO este archivo y
