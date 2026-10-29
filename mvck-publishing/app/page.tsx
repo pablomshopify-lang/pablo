@@ -81,7 +81,7 @@ const PILLARS = [
     text: 'Revisamos cada registro para recuperar las regalías que hoy se pierden.',
   },
   {
-    title: 'Parte del Holding MVCK',
+    title: 'Parte de Maverick Music Entertainment LLC',
     text: 'Trabajamos junto a Mvck Music, la distribuidora del grupo.',
   },
 ] as const;
@@ -306,7 +306,7 @@ export default function Home() {
         <div className="footer-top">
           <div className="footer-brand">
             <Logo className="footer-logo" />
-            <p>Parte del Holding MVCK</p>
+            <p>Parte de Maverick Music Entertainment LLC</p>
           </div>
           <ul className="footer-links" aria-label="Enlaces">
             <li>

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     'Distribución musical boutique: conectamos tu música con el mundo con atención personal. Distribución digital, publishing, marketing, derechos digitales y regalías para artistas y sellos independientes.',
   openGraph: {
     title: 'Mvck Music · Distribución musical',
-    description: 'Tu música, en todo el mundo.',
+    description: 'Tu música suena mejor cuando llega lejos.',
     type: 'website',
     locale: 'es_CL',
   },
