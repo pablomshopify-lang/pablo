@@ -48,6 +48,14 @@ Mientras no lo conectes, cada inscripción llega igual por correo (Formspree).
 5. **Implementar → Nueva implementación → tipo: Aplicación web**. «Ejecutar como: Yo», «Quién tiene acceso: Cualquier usuario». Pulsa **Implementar** y copia la URL que termina en `/exec`.
 6. En Vercel, abre el proyecto → **Settings → Environment Variables** → agrega `GOOGLE_SCRIPT_URL` con esa URL → **Save** y luego **Redeploy**.
 
+## Conectar el panel central de artistas (opcional)
+
+Si el Holding usa el panel central (carpeta `panel/`), agrega en Vercel la
+variable `PANEL_INGRESO_URL` con la URL completa de su ingreso, incluida la
+clave (`https://…/api/ingreso?clave=…`). Cada ficha se envía al panel y,
+si también está `GOOGLE_SCRIPT_URL`, a la hoja de Google. Basta con que uno
+de los dos la reciba.
+
 ## Publicar en Vercel
 
 **Add New → Project** → importa el repositorio `pablo` → en **Root Directory** elige `ingreso-artistas` → **Deploy**.

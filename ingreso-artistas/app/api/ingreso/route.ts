@@ -89,36 +89,48 @@ export async function POST(req: Request) {
     tareas,
   };
 
-  const hoja = process.env.GOOGLE_SCRIPT_URL;
-  try {
-    const res = hoja
-      ? await fetch(hoja, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(ficha),
-        })
-      : await fetch(FORMSPREE, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            _subject: `Nuevo artista: ${datos.nombre_artistico} · ${empresa.nombre}`,
-            email: datos.email,
-            ...ficha,
-            redes: JSON.stringify(redes, null, 2),
-            respuestas: JSON.stringify(respuestas, null, 2),
-            tareas: tareas
-              .map(
-                (t) =>
-                  `${t.paso}. ${t.tarea} (${t.responsable}, vence ${t.vence})`,
-              )
-              .join('\n'),
-          }),
-        });
-    if (!res.ok) throw new Error(String(res.status));
-  } catch {
+  // Destinos: el panel central del Holding y/o la hoja de Google. Si no hay
+  // ninguno configurado, la ficha llega por correo (Formspree).
+  const destinos = [
+    process.env.PANEL_INGRESO_URL,
+    process.env.GOOGLE_SCRIPT_URL,
+  ].filter((u): u is string => Boolean(u));
+  const enviar = (url: string) =>
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(ficha),
+    }).then((res) => {
+      if (!res.ok) throw new Error(String(res.status));
+    });
+  const porCorreo = () =>
+    fetch(FORMSPREE, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        _subject: `Nuevo artista: ${datos.nombre_artistico} · ${empresa.nombre}`,
+        email: datos.email,
+        ...ficha,
+        redes: JSON.stringify(redes, null, 2),
+        respuestas: JSON.stringify(respuestas, null, 2),
+        tareas: tareas
+          .map(
+            (t) => `${t.paso}. ${t.tarea} (${t.responsable}, vence ${t.vence})`,
+          )
+          .join('\n'),
+      }),
+    }).then((res) => {
+      if (!res.ok) throw new Error(String(res.status));
+    });
+
+  const resultados = await Promise.allSettled(
+    destinos.length ? destinos.map(enviar) : [porCorreo()],
+  );
+  // Basta con que un destino la reciba para no perder la ficha.
+  if (!resultados.some((r) => r.status === 'fulfilled')) {
     return NextResponse.json({ ok: false }, { status: 502 });
   }
 
