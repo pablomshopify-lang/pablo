@@ -7,6 +7,12 @@
  * 3) Avisa por correo al equipo.
  *
  * Así cada empresa tiene sus propias pestañas. Se crean solas la primera vez.
+ *
+ * Todo es personalizable desde la hoja, sin tocar código:
+ * - «Plazos»: días de cada tarea por empresa. Cambia un número y los próximos
+ *   ingresos usan ese plazo. La fecha «Vence» de cada tarea también se edita.
+ * - «Configuración»: cada cuántos meses se liquidan regalías (por defecto 3).
+ *   En la ficha de cada artista se puede cambiar para su contrato.
  */
 const CORREO_EQUIPO = 'cambia-esto@tu-dominio.com'; // a quién avisar (puedes poner varios separados por coma)
 
@@ -26,6 +32,7 @@ const COLUMNAS_ARTISTAS = [
   ['manager', 'Manager'],
   ['empresa', 'Empresa'],
   ['intereses', 'También le interesa'],
+  ['regalias', 'Liquidación de regalías'],
   ['estado', 'Estado'],
   ['redes', 'Redes'],
   ['respuestas', 'Respuestas'],
@@ -63,10 +70,40 @@ const enLineas = (obj) =>
     .map((k) => k + ': ' + obj[k])
     .join('\n');
 
+/** Lee (o crea) un valor de la pestaña «Configuración». */
+function config(nombre, porDefecto) {
+  const h = hoja('Configuración', ['Ajuste', 'Valor']);
+  const filas = h.getDataRange().getValues();
+  for (let i = 1; i < filas.length; i++) {
+    if (filas[i][0] === nombre && filas[i][1] !== '') return filas[i][1];
+  }
+  h.appendRow([nombre, porDefecto]);
+  return porDefecto;
+}
+
+/** Días de una tarea según la pestaña «Plazos» (la crea con el valor base). */
+function plazo(empresa, plantilla, porDefecto) {
+  const h = hoja('Plazos', ['Empresa', 'Tarea', 'Días']);
+  const filas = h.getDataRange().getValues();
+  for (let i = 1; i < filas.length; i++) {
+    if (filas[i][0] === empresa && filas[i][1] === plantilla) {
+      const dias = Number(filas[i][2]);
+      return isNaN(dias) ? porDefecto : dias;
+    }
+  }
+  h.appendRow([empresa, plantilla, porDefecto]);
+  return porDefecto;
+}
+
 function doPost(e) {
   const f = JSON.parse(e.postData.contents);
   f.estado = 'Nuevo';
   f.fecha = new Date(f.fecha);
+  const meses = config(
+    'Liquidación de regalías (cada cuántos meses)',
+    f.regalias_meses || 3,
+  );
+  f.regalias = 'Cada ' + meses + ' meses';
 
   const artistas = hoja(
     f.empresa + ' · Artistas',
@@ -81,17 +118,22 @@ function doPost(e) {
   );
 
   const tareas = hoja(f.empresa + ' · Tareas', COLUMNAS_TAREAS);
-  const filas = (f.tareas || []).map((t) => [
-    f.id,
-    f.nombre_artistico,
-    t.paso,
-    t.tarea,
-    t.area,
-    t.responsable,
-    new Date(t.vence + 'T12:00:00'),
-    false,
-    '',
-  ]);
+  const filas = (f.tareas || []).map((t) => {
+    const plantilla = t.plantilla || t.tarea;
+    const dias = plazo(f.empresa, plantilla, t.dias);
+    const vence = new Date(f.fecha.getTime() + dias * 86400000);
+    return [
+      f.id,
+      f.nombre_artistico,
+      t.paso,
+      plantilla.replace('{meses}', meses),
+      t.area,
+      t.responsable,
+      vence,
+      false,
+      '',
+    ];
+  });
   if (filas.length) {
     const desde = tareas.getLastRow() + 1;
     tareas
@@ -140,6 +182,7 @@ function probar() {
           {
             paso: 1,
             tarea: 'Tarea de prueba',
+            dias: 2,
             area: 'Dirección',
             responsable: 'Sebastián Biggio (CEO)',
             vence: '2026-12-01',

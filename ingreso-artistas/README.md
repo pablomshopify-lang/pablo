@@ -27,6 +27,16 @@ marca interés en otra empresa, se agrega una tarea para derivarlo.
 | Datos y redes que se piden                          | `lib/campos.ts`              |
 | Colores generales                                   | `app/globals.css`            |
 
+## Personalizar plazos y regalías (desde la hoja de Google)
+
+- **Plazos:** la pestaña «Plazos» lista cada tarea por empresa con sus días.
+  Cambia el número y los próximos ingresos usan ese plazo. La fecha «Vence»
+  de cualquier tarea ya creada también se puede editar a mano.
+- **Regalías:** en «Configuración» está cada cuántos meses se liquidan
+  (por defecto 3). En la ficha de cada artista, la columna «Liquidación de
+  regalías» se puede cambiar según su contrato.
+- Los valores base están en `lib/empresas.ts` (`dias` y `REGALIAS_MESES`).
+
 ## Conectar Google Sheets (una sola vez, 5 minutos)
 
 Mientras no lo conectes, cada inscripción llega igual por correo (Formspree).

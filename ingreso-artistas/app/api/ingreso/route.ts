@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { DATOS, REDES } from '@/lib/campos';
-import { EQUIPO, empresaPorId } from '@/lib/empresas';
+import { EQUIPO, REGALIAS_MESES, empresaPorId } from '@/lib/empresas';
 import type { Empresa } from '@/lib/empresas';
 
 // Formulario de respaldo mientras no esté conectada la hoja de Google.
@@ -67,7 +67,10 @@ export async function POST(req: Request) {
     })),
   ].map((t, i) => ({
     paso: i + 1,
-    tarea: t.tarea,
+    // La hoja de Google usa `plantilla` para buscar plazos personalizados.
+    plantilla: t.tarea,
+    tarea: t.tarea.replace('{meses}', String(REGALIAS_MESES)),
+    dias: t.dias,
     area: t.area,
     responsable: EQUIPO[t.area],
     vence: vence(t.dias),
@@ -78,6 +81,7 @@ export async function POST(req: Request) {
     fecha: hoy.toISOString(),
     ...datos,
     empresa: empresa.nombre,
+    regalias_meses: REGALIAS_MESES,
     intereses: intereses.map((e) => e.nombre).join(', '),
     redes,
     respuestas,

@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
-import { EQUIPO, PROJECT_MANAGER, EMPRESAS } from '@/lib/empresas';
+import {
+  EQUIPO,
+  EMPRESAS,
+  PROJECT_MANAGER,
+  REGALIAS_MESES,
+} from '@/lib/empresas';
 
 export const metadata: Metadata = {
   title: 'Procedimientos internos · Holding MVCK',
@@ -43,7 +48,9 @@ export default function Procedimientos() {
           <ol>
             {s.tareas.map((t) => (
               <li key={t.tarea}>
-                <span>{t.tarea}</span>
+                <span>
+                  {t.tarea.replace('{meses}', String(REGALIAS_MESES))}
+                </span>
                 <small>
                   {EQUIPO[t.area]} · día {t.dias}
                 </small>

@@ -6,7 +6,10 @@
  * en sus propias pestañas de Google Sheets. Para cambiar un paso, agregar
  * una pregunta o sumar una empresa nueva, se edita solo aquí.
  *
- * `dias` = cuántos días después del ingreso vence esa tarea.
+ * `dias` = cuántos días después del ingreso vence esa tarea (por defecto: el
+ * equipo puede cambiarlo en la pestaña «Plazos» de la hoja de Google).
+ * `{meses}` en una tarea se reemplaza por la frecuencia de liquidación de
+ * regalías (pestaña «Configuración» de la hoja).
  * `area` = departamento que se hace cargo (ver EQUIPO más abajo).
  */
 
@@ -20,6 +23,9 @@ export const EQUIPO = {
 } as const;
 
 export type Area = keyof typeof EQUIPO;
+
+/** Cada cuántos meses se liquidan regalías, si nadie lo cambia en la hoja. */
+export const REGALIAS_MESES = 3;
 
 /** Coordina todo el proceso y es el responsable si nadie más lo es. */
 export const PROJECT_MANAGER = 'Pablo Moreno';
@@ -141,7 +147,8 @@ export const EMPRESAS: Empresa[] = [
         dias: 30,
       },
       {
-        tarea: 'Configurar reportes y pago de regalías',
+        tarea:
+          'Configurar reportes y liquidación de regalías cada {meses} meses',
         area: 'Dirección',
         dias: 35,
       },
@@ -209,7 +216,7 @@ export const EMPRESAS: Empresa[] = [
         dias: 25,
       },
       {
-        tarea: 'Configurar la liquidación de regalías',
+        tarea: 'Configurar la liquidación de regalías cada {meses} meses',
         area: 'Dirección',
         dias: 30,
       },
@@ -360,6 +367,11 @@ export const EMPRESAS: Empresa[] = [
       {
         tarea: 'Coordinar logística: viajes, hospedaje y transporte',
         area: 'Ventas y Marketing',
+        dias: 30,
+      },
+      {
+        tarea: 'Producción del show el día del evento',
+        area: 'Dirección',
         dias: 30,
       },
       {
