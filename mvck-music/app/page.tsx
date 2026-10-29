@@ -100,9 +100,9 @@ export default function Home() {
           </Reveal>
           <Reveal delay={80}>
             <h1 id="hero-title" className="display">
-              Tu música,
+              Tu música suena mejor
               <br />
-              <span className="gradient-text">en todo el mundo.</span>
+              <span className="gradient-text">cuando llega lejos.</span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
@@ -250,7 +250,7 @@ export default function Home() {
         <div className="footer-top">
           <div className="footer-brand">
             <Logo className="footer-logo" />
-            <p>Parte del Holding MVCK</p>
+            <p>Parte de Maverick Music Entertainment LLC</p>
           </div>
           <ul className="footer-links" aria-label="Enlaces">
             <li>

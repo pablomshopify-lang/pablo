@@ -1,7 +1,7 @@
 /** Enlaces y datos de contacto. Cámbialos aquí y se actualizan en todo el sitio. */
 export const LINKS = {
   // Correo provisorio: cámbialo cuando exista uno de Maverick Records.
-  email: 'contact@mvckmusic.com',
+  email: 'contact@maverickrecords.cl',
   instagram: 'https://www.instagram.com/maverickrecords_/',
   instagramHandle: '@maverickrecords_',
   mvckMusic: 'https://mvckmusic.com',

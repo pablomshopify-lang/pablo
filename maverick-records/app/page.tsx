@@ -250,7 +250,7 @@ export default function Home() {
         <section className="section family" aria-labelledby="holding-title">
           <Reveal>
             <h2 id="holding-title" className="family-title">
-              Parte del Holding MVCK
+              Parte de Maverick Music Entertainment LLC
             </h2>
           </Reveal>
           <ul className="family-list">

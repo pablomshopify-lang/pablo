@@ -1,6 +1,6 @@
 # Maverick Records · Sitio web
 
-Sitio de **Maverick Records** (sello musical independiente del Holding MVCK) en **Next.js + TypeScript**, con diseño estilo Apple, listo para publicar en **Vercel**.
+Sitio de **Maverick Records** (sello musical independiente de Maverick Music Entertainment LLC) en **Next.js + TypeScript**, con diseño estilo Apple, listo para publicar en **Vercel**.
 
 ## Qué hay en cada archivo
 

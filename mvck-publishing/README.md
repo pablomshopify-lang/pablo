@@ -1,6 +1,6 @@
 # Mvck Publishing · Sitio web
 
-Sitio de **Mvck Publishing** (editorial musical del Holding MVCK) en **Next.js + TypeScript**, con diseño estilo Apple, listo para publicar en **Vercel**.
+Sitio de **Mvck Publishing** (editorial musical de Maverick Music Entertainment LLC) en **Next.js + TypeScript**, con diseño estilo Apple, listo para publicar en **Vercel**.
 
 ## Qué hay en cada archivo
 

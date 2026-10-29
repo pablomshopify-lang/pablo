@@ -1,6 +1,6 @@
 # Mvck Music · Sitio web
 
-Sitio de **Mvck Music** (distribuidora musical del Holding MVCK) en **Next.js + TypeScript**, con diseño estilo Apple, listo para publicar en **Vercel**.
+Sitio de **Mvck Music** (distribuidora musical de Maverick Music Entertainment LLC) en **Next.js + TypeScript**, con diseño estilo Apple, listo para publicar en **Vercel**.
 
 ## Qué hay en cada archivo
 
