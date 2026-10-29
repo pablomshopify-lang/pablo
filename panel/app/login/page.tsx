@@ -13,7 +13,7 @@ export default async function PaginaLogin({
     <main className="login">
       <section className="card">
         <div>
-          <p className="eyebrow">Holding MVCK</p>
+          <p className="eyebrow">Maverick Music Entertainment</p>
           <h1>Panel central</h1>
         </div>
         <p className="muted">

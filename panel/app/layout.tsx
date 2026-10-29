@@ -18,8 +18,12 @@ const display = Unbounded({
 });
 
 export const metadata: Metadata = {
-  title: { default: 'Panel · Holding MVCK', template: '%s · Panel MVCK' },
-  description: 'Panel interno del Holding MVCK: artistas, contratos y tareas.',
+  title: {
+    default: 'Panel · Maverick Music Entertainment',
+    template: '%s · Maverick Music Entertainment',
+  },
+  description:
+    'Panel interno de Maverick Music Entertainment: artistas, contratos y tareas.',
   robots: { index: false, follow: false },
 };
 

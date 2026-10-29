@@ -16,7 +16,7 @@ export default async function LayoutPanel({
       <header className="barra">
         <div className="barra-in">
           <Link href="/" className="marca">
-            MVCK · PANEL
+            MAVERICK MUSIC ENTERTAINMENT
           </Link>
           <Menu />
           <div className="yo">

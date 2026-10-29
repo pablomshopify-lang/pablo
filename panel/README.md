@@ -1,4 +1,4 @@
-# Panel central · Holding MVCK
+# Panel central · Maverick Music Entertainment
 
 Panel interno con **una sola base** de artistas, contratos y tareas de Mvck
 Music, MVCK Publishing, Maverick Records y Maverick Live. Cada persona del
