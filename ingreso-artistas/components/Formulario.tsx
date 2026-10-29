@@ -1,29 +1,29 @@
 'use client';
 
 import { useState } from 'react';
-import type { CSSProperties, FormEvent } from 'react';
+import type { FormEvent } from 'react';
 import { DATOS, REDES } from '@/lib/campos';
 import type { Campo } from '@/lib/campos';
-import { SERVICIOS } from '@/lib/servicios';
-import type { Pregunta } from '@/lib/servicios';
-
-const PASOS = ['Tus datos', 'Tus redes', 'Servicios', 'Enviar'] as const;
+import { EMPRESAS } from '@/lib/empresas';
+import type { Pregunta } from '@/lib/empresas';
 
 type Estado = 'editando' | 'enviando' | 'listo' | 'error';
 
-export function Formulario() {
+export function Formulario({ empresaId }: { empresaId: string }) {
+  const empresa = EMPRESAS.find((e) => e.id === empresaId) ?? EMPRESAS[0]!;
+  const otras = EMPRESAS.filter((e) => e.id !== empresa.id);
+  const PASOS = ['Tus datos', 'Tus redes', empresa.nombre, 'Enviar'];
+
   const [paso, setPaso] = useState(0);
   const [datos, setDatos] = useState<Record<string, string>>({});
   const [redes, setRedes] = useState<Record<string, string>>({});
-  const [servicios, setServicios] = useState<string[]>([]);
   const [respuestas, setRespuestas] = useState<Record<string, string>>({});
+  const [intereses, setIntereses] = useState<string[]>([]);
   const [comentarios, setComentarios] = useState('');
   const [acepta, setAcepta] = useState(false);
   const [aviso, setAviso] = useState('');
   const [estado, setEstado] = useState<Estado>('editando');
   const [id, setId] = useState('');
-
-  const elegidos = SERVICIOS.filter((s) => servicios.includes(s.id));
 
   function validar(): string {
     if (paso === 0) {
@@ -32,8 +32,6 @@ export function Formulario() {
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email ?? ''))
         return 'Revisa tu correo';
     }
-    if (paso === 2 && servicios.length === 0)
-      return 'Elige al menos un servicio';
     if (paso === 3 && !acepta) return 'Debes aceptar el uso de tus datos';
     return '';
   }
@@ -61,10 +59,11 @@ export function Formulario() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          empresa: empresa.id,
           datos,
           redes,
-          servicios,
           respuestas,
+          intereses,
           comentarios,
           _gotcha: gotcha,
         }),
@@ -90,12 +89,22 @@ export function Formulario() {
         </p>
         <h3>Qué sigue</h3>
         <ul className="sigue">
-          {elegidos.map((s) => (
-            <li key={s.id} style={{ '--c': s.color } as CSSProperties}>
-              <strong>{s.nombre}</strong>
-              <span>{s.queSigue}</span>
+          <li>
+            <strong>{empresa.nombre}</strong>
+            <span>{empresa.queSigue}</span>
+          </li>
+          {intereses.length > 0 && (
+            <li>
+              <strong>También te interesa</strong>
+              <span>
+                {otras
+                  .filter((o) => intereses.includes(o.id))
+                  .map((o) => o.nombre)
+                  .join(', ')}
+                : le pasaremos tu ficha a ese equipo.
+              </span>
             </li>
-          ))}
+          )}
         </ul>
       </section>
     );
@@ -160,54 +169,39 @@ export function Formulario() {
 
       {paso === 2 && (
         <fieldset>
-          <legend>¿Qué necesitas del Holding?</legend>
-          <p className="muted">Puedes elegir más de uno.</p>
-          <div className="servicios">
-            {SERVICIOS.map((s) => {
-              const activo = servicios.includes(s.id);
-              return (
-                <div
-                  key={s.id}
-                  className={`servicio${activo ? ' activo' : ''}`}
-                  style={{ '--c': s.color } as CSSProperties}
-                >
-                  <label className="servicio-cabeza">
-                    <input
-                      type="checkbox"
-                      checked={activo}
-                      onChange={() =>
-                        setServicios(
-                          activo
-                            ? servicios.filter((x) => x !== s.id)
-                            : [...servicios, s.id],
-                        )
-                      }
-                    />
-                    <span>
-                      <strong>{s.nombre}</strong>
-                      <small>{s.resumen}</small>
-                    </span>
-                  </label>
-                  {activo && (
-                    <div className="grid preguntas">
-                      {s.preguntas.map((p) => {
-                        const clave = `${s.id}.${p.id}`;
-                        return (
-                          <PreguntaExtra
-                            key={clave}
-                            pregunta={p}
-                            valor={respuestas[clave] ?? ''}
-                            onChange={(v) =>
-                              setRespuestas({ ...respuestas, [clave]: v })
-                            }
-                          />
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+          <legend>Tu proyecto con {empresa.nombre}</legend>
+          <div className="grid">
+            {empresa.preguntas.map((p) => (
+              <PreguntaExtra
+                key={p.id}
+                pregunta={p}
+                valor={respuestas[p.id] ?? ''}
+                onChange={(v) => setRespuestas({ ...respuestas, [p.id]: v })}
+              />
+            ))}
+          </div>
+          <div className="intereses">
+            <p className="muted">
+              ¿Te interesa también otra empresa del Holding? (opcional)
+            </p>
+            {otras.map((o) => (
+              <label key={o.id} className="check">
+                <input
+                  type="checkbox"
+                  checked={intereses.includes(o.id)}
+                  onChange={(e) =>
+                    setIntereses(
+                      e.target.checked
+                        ? [...intereses, o.id]
+                        : intereses.filter((x) => x !== o.id),
+                    )
+                  }
+                />
+                <span>
+                  <strong>{o.nombre}</strong> · {o.resumen}
+                </span>
+              </label>
+            ))}
           </div>
         </fieldset>
       )}
@@ -230,8 +224,8 @@ export function Formulario() {
                 .map((c) => c.label)
                 .join(', ') || 'Ninguna'}
             </dd>
-            <dt>Servicios</dt>
-            <dd>{elegidos.map((s) => s.nombre).join(', ')}</dd>
+            <dt>Empresa</dt>
+            <dd>{empresa.nombre}</dd>
           </dl>
           <label className="campo">
             <span>¿Algo más que debamos saber?</span>
@@ -248,8 +242,8 @@ export function Formulario() {
               onChange={(e) => setAcepta(e.target.checked)}
             />
             <span>
-              Acepto que el Holding MVCK use estos datos para evaluar y
-              gestionar mi solicitud.
+              Acepto que {empresa.nombre} y el Holding MVCK usen estos datos
+              para evaluar y gestionar mi ingreso.
             </span>
           </label>
         </fieldset>
@@ -288,7 +282,7 @@ export function Formulario() {
             ? 'Continuar'
             : estado === 'enviando'
               ? 'Enviando…'
-              : 'Enviar solicitud'}
+              : 'Enviar'}
         </button>
       </div>
     </form>

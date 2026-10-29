@@ -1,10 +1,10 @@
 /**
- * Servicios del Holding MVCK y su procedimiento interno.
+ * Empresas del Holding MVCK y su procedimiento de ingreso de artistas.
  *
- * Todo el sistema sale de esta lista: las casillas del formulario, las
- * preguntas extra de cada servicio, la lista de tareas que se crea en
- * Google Sheets y la página /procedimientos. Para cambiar un paso,
- * agregar una pregunta o sumar un servicio nuevo, se edita solo aquí.
+ * Cada empresa tiene su propio formulario en /<id> (ej: /mvck-music), con
+ * sus preguntas, sus colores y su lista de tareas internas, que se guarda
+ * en sus propias pestañas de Google Sheets. Para cambiar un paso, agregar
+ * una pregunta o sumar una empresa nueva, se edita solo aquí.
  *
  * `dias` = cuántos días después del ingreso vence esa tarea.
  * `area` = departamento que se hace cargo (ver EQUIPO más abajo).
@@ -38,24 +38,30 @@ export type Tarea = {
   dias: number;
 };
 
-export type Servicio = {
+export type Empresa = {
   id: string;
   nombre: string;
   resumen: string;
   color: string;
+  /** Color del texto sobre el color de marca (botones). */
+  sobreColor: string;
+  /** Web pública de la empresa. */
+  web: string;
   preguntas: Pregunta[];
   /** Lo que el artista ve en la pantalla final: qué viene ahora. */
   queSigue: string;
   tareas: Tarea[];
 };
 
-export const SERVICIOS: Servicio[] = [
+export const EMPRESAS: Empresa[] = [
   {
     id: 'mvck-music',
     nombre: 'Mvck Music',
     resumen:
       'Distribución digital: tu música en Spotify, Apple Music, YouTube, TikTok y más.',
     color: '#00afd8',
+    sobreColor: '#000',
+    web: 'https://pablo-fawn.vercel.app',
     preguntas: [
       {
         id: 'distribuidora_actual',
@@ -147,6 +153,8 @@ export const SERVICIOS: Servicio[] = [
     resumen:
       'Editorial musical: registramos tus canciones y cobramos tus regalías de autor en el mundo.',
     color: '#f49d00',
+    sobreColor: '#000',
+    web: 'https://mvck-publishing.vercel.app',
     preguntas: [
       {
         id: 'sociedad',
@@ -213,6 +221,8 @@ export const SERVICIOS: Servicio[] = [
     resumen:
       'Sello discográfico: grabación, producción, lanzamiento y desarrollo de carrera.',
     color: '#ffffff',
+    sobreColor: '#000',
+    web: 'https://maverick-records-l47p.vercel.app',
     preguntas: [
       {
         id: 'demos',
@@ -296,6 +306,8 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Maverick Live',
     resumen: 'Shows en vivo: booking, producción de eventos y giras.',
     color: '#e50041',
+    sobreColor: '#fff',
+    web: 'https://maverick-live1.vercel.app',
     preguntas: [
       {
         id: 'formato',
@@ -359,4 +371,4 @@ export const SERVICIOS: Servicio[] = [
   },
 ];
 
-export const servicioPorId = (id: string) => SERVICIOS.find((s) => s.id === id);
+export const empresaPorId = (id: string) => EMPRESAS.find((e) => e.id === id);

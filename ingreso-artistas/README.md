@@ -1,21 +1,31 @@
 # Ingreso de artistas · Holding MVCK
 
-Formulario web donde un artista deja sus datos, sus redes y elige los
-servicios del Holding (Mvck Music, MVCK Publishing, Maverick Records,
-Maverick Live). Al enviarlo se crea su ficha y la lista de tareas internas
-de cada servicio, con responsable y fecha.
+Sistema interno de ingreso de artistas, **separado por empresa**. Cada
+empresa del Holding tiene su propio formulario, con sus preguntas, sus
+colores y su lista de tareas internas:
 
-- `/` → formulario para el artista (4 pasos).
-- `/procedimientos` → página interna con los pasos de cada servicio y quién los hace.
+| Empresa          | Link de ingreso     |
+| ---------------- | ------------------- |
+| Mvck Music       | `/mvck-music`       |
+| MVCK Publishing  | `/mvck-publishing`  |
+| Maverick Records | `/maverick-records` |
+| Maverick Live    | `/maverick-live`    |
+
+El artista entra por el link de la empresa con la que trabaja. Al enviar,
+se crea su ficha y las tareas de esa empresa con responsable y fecha. Si
+marca interés en otra empresa, se agrega una tarea para derivarlo.
+
+- `/` → índice interno con los links de cada empresa.
+- `/procedimientos` → página interna con los pasos de cada empresa y quién los hace.
 
 ## Dónde se cambia cada cosa
 
-| Quiero cambiar…                                      | Archivo                       |
-| ---------------------------------------------------- | ----------------------------- |
-| Pasos, responsables, plazos o preguntas por servicio | `lib/servicios.ts`            |
-| Personas del organigrama                             | `lib/servicios.ts` (`EQUIPO`) |
-| Datos y redes que se piden                           | `lib/campos.ts`               |
-| Colores                                              | `app/globals.css`             |
+| Quiero cambiar…                                     | Archivo                      |
+| --------------------------------------------------- | ---------------------------- |
+| Pasos, responsables, plazos o preguntas por empresa | `lib/empresas.ts`            |
+| Personas del organigrama                            | `lib/empresas.ts` (`EQUIPO`) |
+| Datos y redes que se piden                          | `lib/campos.ts`              |
+| Colores generales                                   | `app/globals.css`            |
 
 ## Conectar Google Sheets (una sola vez, 5 minutos)
 
@@ -24,7 +34,7 @@ Mientras no lo conectes, cada inscripción llega igual por correo (Formspree).
 1. Crea una hoja nueva en Google Sheets, por ejemplo «Ingreso de artistas».
 2. Menú **Extensiones → Apps Script**. Borra lo que aparece y pega el contenido de `google/apps-script.gs`.
 3. En la línea `CORREO_EQUIPO` pon el correo que debe recibir los avisos. Guarda (ícono de disquete).
-4. Arriba elige la función `probar` y pulsa **Ejecutar**. Acepta los permisos. Deberías ver las hojas «Artistas» y «Tareas» con una fila de prueba (puedes borrarla).
+4. Arriba elige la función `probar` y pulsa **Ejecutar**. Acepta los permisos. Deberías ver las pestañas «Mvck Music · Artistas» y «Mvck Music · Tareas» con una fila de prueba (puedes borrarla).
 5. **Implementar → Nueva implementación → tipo: Aplicación web**. «Ejecutar como: Yo», «Quién tiene acceso: Cualquier usuario». Pulsa **Implementar** y copia la URL que termina en `/exec`.
 6. En Vercel, abre el proyecto → **Settings → Environment Variables** → agrega `GOOGLE_SCRIPT_URL` con esa URL → **Save** y luego **Redeploy**.
 

@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
-import { EQUIPO, PROJECT_MANAGER, SERVICIOS } from '@/lib/servicios';
+import { EQUIPO, PROJECT_MANAGER, EMPRESAS } from '@/lib/empresas';
 
 export const metadata: Metadata = {
   title: 'Procedimientos internos · Holding MVCK',
 };
 
 // Página interna (no está enlazada desde el formulario): muestra al equipo
-// los pasos de cada servicio, quién los hace y en cuántos días.
+// los pasos de cada empresa, quién los hace y en cuántos días.
 export default function Procedimientos() {
   return (
     <main className="wrap">
@@ -32,7 +32,7 @@ export default function Procedimientos() {
         </dl>
       </section>
 
-      {SERVICIOS.map((s) => (
+      {EMPRESAS.map((s) => (
         <section
           key={s.id}
           className="card proc"

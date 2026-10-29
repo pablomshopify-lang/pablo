@@ -1,12 +1,12 @@
 /**
  * Holding MVCK · Ingreso de artistas
  *
- * Recibe cada inscripción de la web y:
- * 1) Agrega una fila en la hoja "Artistas" con todos sus datos.
- * 2) Agrega sus tareas en la hoja "Tareas" (con casilla para marcar hecho).
+ * Recibe cada ingreso desde el formulario de una empresa y:
+ * 1) Agrega una fila en la pestaña "<Empresa> · Artistas" con sus datos.
+ * 2) Agrega sus tareas en "<Empresa> · Tareas" (con casilla para marcar hecho).
  * 3) Avisa por correo al equipo.
  *
- * Las hojas y sus títulos se crean solos la primera vez.
+ * Así cada empresa tiene sus propias pestañas. Se crean solas la primera vez.
  */
 const CORREO_EQUIPO = 'cambia-esto@tu-dominio.com'; // a quién avisar (puedes poner varios separados por coma)
 
@@ -24,10 +24,11 @@ const COLUMNAS_ARTISTAS = [
   ['tipo', 'Tipo'],
   ['genero', 'Género'],
   ['manager', 'Manager'],
-  ['servicios', 'Servicios'],
+  ['empresa', 'Empresa'],
+  ['intereses', 'También le interesa'],
   ['estado', 'Estado'],
   ['redes', 'Redes'],
-  ['respuestas', 'Respuestas por servicio'],
+  ['respuestas', 'Respuestas'],
   ['bio', 'Bio'],
   ['comentarios', 'Comentarios'],
 ];
@@ -35,7 +36,6 @@ const COLUMNAS_ARTISTAS = [
 const COLUMNAS_TAREAS = [
   'ID artista',
   'Artista',
-  'Servicio',
   'Paso',
   'Tarea',
   'Departamento',
@@ -69,7 +69,7 @@ function doPost(e) {
   f.fecha = new Date(f.fecha);
 
   const artistas = hoja(
-    'Artistas',
+    f.empresa + ' · Artistas',
     COLUMNAS_ARTISTAS.map((c) => c[1]),
   );
   artistas.appendRow(
@@ -80,11 +80,10 @@ function doPost(e) {
     }),
   );
 
-  const tareas = hoja('Tareas', COLUMNAS_TAREAS);
+  const tareas = hoja(f.empresa + ' · Tareas', COLUMNAS_TAREAS);
   const filas = (f.tareas || []).map((t) => [
     f.id,
     f.nombre_artistico,
-    t.servicio,
     t.paso,
     t.tarea,
     t.area,
@@ -98,7 +97,7 @@ function doPost(e) {
     tareas
       .getRange(desde, 1, filas.length, COLUMNAS_TAREAS.length)
       .setValues(filas);
-    tareas.getRange(desde, 9, filas.length, 1).insertCheckboxes();
+    tareas.getRange(desde, 8, filas.length, 1).insertCheckboxes();
   }
 
   if (
@@ -107,11 +106,11 @@ function doPost(e) {
   ) {
     MailApp.sendEmail({
       to: CORREO_EQUIPO,
-      subject:
-        'Nuevo artista: ' + f.nombre_artistico + ' (' + f.servicios + ')',
+      subject: f.empresa + ' · nuevo artista: ' + f.nombre_artistico,
       body: [
         'Ingresó un artista nuevo: ' + f.nombre_artistico + ' · ' + f.id,
-        'Servicios: ' + f.servicios,
+        'Empresa: ' + f.empresa,
+        'También le interesa: ' + (f.intereses || '—'),
         'Contacto: ' + f.email + ' · ' + f.telefono,
         '',
         'Se crearon ' + filas.length + ' tareas en la hoja:',
@@ -135,11 +134,10 @@ function probar() {
         fecha: new Date().toISOString(),
         nombre_artistico: 'Artista de prueba',
         email: Session.getActiveUser().getEmail(),
-        servicios: 'Mvck Music',
+        empresa: 'Mvck Music',
         redes: { instagram: '@prueba' },
         tareas: [
           {
-            servicio: 'Mvck Music',
             paso: 1,
             tarea: 'Tarea de prueba',
             area: 'Dirección',
