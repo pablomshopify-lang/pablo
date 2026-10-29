@@ -1,0 +1,380 @@
+/* ---------- Colores de marca (cambia aquí para ajustar todo el sitio) ---------- */
+:root {
+  --bg: #000;
+  --surface: #0d0e10;
+  --field: #16171a;
+  --fg: #f5f5f7;
+  --muted: #a1a1a6;
+  --line: rgb(255 255 255 / 0.1);
+  /* Rojo Maverick y su degradado a violeta */
+  --brand: #e50041;
+  --brand-2: #62308c;
+  --radius: 1.5rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      60rem 30rem at 50% -10rem,
+      rgb(229 0 65 / 0.18),
+      transparent 70%
+    ),
+    var(--bg);
+  color: var(--fg);
+  font:
+    1.0625rem/1.5 var(--font-inter),
+    system-ui,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: min(100% - 2rem, 46rem);
+  margin: 0 auto;
+  padding: 4rem 0 6rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.hero {
+  display: grid;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 3.25rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.card h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+}
+
+/* ---------- Pasos ---------- */
+.pasos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.pasos li {
+  display: grid;
+  gap: 0.4rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.pasos span {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  transition: background 0.3s var(--ease-out);
+}
+
+.pasos .actual {
+  color: var(--fg);
+}
+
+.pasos .actual span,
+.pasos .hecho span {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  border-color: transparent;
+  color: #fff;
+}
+
+/* ---------- Campos ---------- */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+legend {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.campo {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.campo.ancho {
+  grid-column: 1 / -1;
+}
+
+.campo em {
+  color: var(--brand);
+  font-style: normal;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--fg);
+  background: var(--field);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+}
+
+input[type='checkbox'] {
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  accent-color: var(--brand);
+  flex: none;
+}
+
+.check {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.oculto {
+  position: absolute;
+  left: -9999px;
+}
+
+/* ---------- Servicios ---------- */
+.servicios {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.servicio {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.servicio.activo {
+  border-color: var(--c);
+  box-shadow: inset 4px 0 0 var(--c);
+}
+
+.servicio-cabeza {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.servicio-cabeza input {
+  accent-color: var(--c);
+  margin-top: 0.15rem;
+}
+
+.servicio-cabeza span {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.servicio-cabeza small {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- Resumen y acciones ---------- */
+.resumen {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+}
+
+.resumen div {
+  display: contents;
+}
+
+.resumen dt {
+  color: var(--muted);
+}
+
+.resumen dd {
+  margin: 0;
+}
+
+.aviso {
+  color: #ff6b8f;
+  font-size: 0.9rem;
+}
+
+.acciones {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.button {
+  font: inherit;
+  font-weight: 600;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85rem 1.6rem;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  transition:
+    transform 0.2s var(--ease-out),
+    opacity 0.2s;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.button-ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+/* ---------- Pantalla final ---------- */
+.listo h3 {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.sigue,
+.proc ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sigue li {
+  display: grid;
+  gap: 0.25rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--c);
+}
+
+.sigue span {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Procedimientos ---------- */
+.proc h2 {
+  color: var(--c);
+}
+
+.proc ol {
+  counter-reset: paso;
+}
+
+.proc li {
+  counter-increment: paso;
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.1rem 0.5rem;
+}
+
+.proc li::before {
+  content: counter(paso);
+  grid-row: span 2;
+  color: var(--c);
+  font-weight: 700;
+}
+
+.proc small {
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
