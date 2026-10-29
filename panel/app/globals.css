@@ -717,3 +717,162 @@ code {
     transition: none !important;
   }
 }
+
+/* ---------- Formularios de ingreso (/ingreso/…) y sus links ---------- */
+.ingreso {
+  width: min(100% - 2rem, 46rem);
+  padding-top: 3rem;
+}
+
+.ing-hero {
+  display: grid;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.ing-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 7vw, 3rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--c), var(--brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ingreso fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.ingreso legend {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.ingreso .campo em {
+  color: var(--c);
+  font-style: normal;
+}
+
+.ingreso input[type='checkbox'] {
+  accent-color: var(--c);
+  flex: none;
+}
+
+.ing-pasos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.ing-pasos li {
+  display: grid;
+  gap: 0.4rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.ing-pasos span {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+}
+
+.ing-pasos .actual {
+  color: var(--fg);
+}
+
+.ing-pasos .actual span,
+.ing-pasos .hecho span {
+  background: var(--c);
+  border-color: transparent;
+  color: var(--on-c);
+}
+
+.ing-oculto {
+  position: absolute;
+  left: -9999px;
+}
+
+.ing-resumen {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+}
+
+.ing-resumen dt {
+  color: var(--muted);
+}
+
+.ing-resumen dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ing-acciones {
+  justify-content: flex-end;
+}
+
+button.ing-btn {
+  background: var(--c);
+  color: var(--on-c);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.ing-listo h3 {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.ing-sigue {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.ing-sigue li {
+  display: grid;
+  gap: 0.25rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--c);
+}
+
+.ing-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+}
+
+.ing-links li {
+  border-top: 3px solid var(--c);
+  gap: 0.5rem;
+}
+
+.ing-links a {
+  color: var(--c);
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+}

@@ -8,6 +8,7 @@ const LINKS = [
   { href: '/artistas', texto: 'Artistas' },
   { href: '/tareas', texto: 'Tareas' },
   { href: '/contratos', texto: 'Contratos' },
+  { href: '/formularios', texto: 'Formularios' },
   { href: '/ajustes', texto: 'Plazos' },
   { href: '/equipo', texto: 'Equipo' },
 ];
