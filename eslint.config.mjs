@@ -39,5 +39,6 @@ export default defineConfig([
     'mvck-publishing/**',
     'maverick-records/**',
     'ingreso-artistas/**',
+    'panel/**',
   ]),
 ]);
