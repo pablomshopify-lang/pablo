@@ -47,6 +47,6 @@ export async function proxy(request: NextRequest) {
 export const config = {
   // Todo menos archivos estáticos y el webhook del formulario de ingreso.
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|icon.svg|api/ingreso).*)',
+    '/((?!_next/static|_next/image|favicon.ico|icon.svg|apple-icon|manifest.webmanifest|api/ingreso).*)',
   ],
 };
