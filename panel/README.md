@@ -56,10 +56,14 @@ cuenta» (clic en su nombre arriba a la derecha).
 
 ### 4. Conectar el formulario de ingreso de artistas
 
-El formulario (`ingreso-artistas`) envía cada inscripción a
-`https://<tu-panel>.vercel.app/api/ingreso?clave=<PANEL_CLAVE_INGRESO>`.
-Si el artista ya existe (mismo correo), se usa su misma ficha y solo se suma
-la empresa nueva con sus tareas.
+En Vercel, abre el proyecto del formulario (`ingreso-artistas`) → **Settings
+→ Environment Variables** → agrega `PANEL_INGRESO_URL` con:
+`https://<tu-panel>.vercel.app/api/ingreso?clave=<PANEL_CLAVE_INGRESO>` →
+**Save** y **Redeploy**.
+
+Desde ahí, cada inscripción llega sola al panel. Si el artista ya existe
+(mismo correo), se usa su misma ficha y solo se suma la empresa nueva con sus
+tareas.
 
 ## Dónde se cambia cada cosa
 
