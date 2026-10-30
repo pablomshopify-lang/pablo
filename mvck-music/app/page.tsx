@@ -265,6 +265,9 @@ export default function Home() {
             <li>
               <a href={LINKS.maverickRecord}>Maverick Record</a>
             </li>
+            <li>
+              <a href={LINKS.mavsTicket}>Mavs Ticket</a>
+            </li>
           </ul>
           <ul className="social" aria-label="Redes sociales">
             <li>

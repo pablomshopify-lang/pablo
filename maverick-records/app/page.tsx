@@ -109,6 +109,7 @@ const FAMILY = [
     role: 'Producción de eventos',
     href: LINKS.maverickLive,
   },
+  { name: 'Mavs Ticket', role: 'Venta de entradas', href: LINKS.mavsTicket },
 ] as const;
 
 const HERO_LINES = ['Independientes.', 'Disidentes.', 'Libres.'] as const;
