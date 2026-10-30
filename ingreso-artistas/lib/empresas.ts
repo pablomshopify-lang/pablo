@@ -229,7 +229,7 @@ export const EMPRESAS: Empresa[] = [
       'Sello discográfico: grabación, producción, lanzamiento y desarrollo de carrera.',
     color: '#ffffff',
     sobreColor: '#000',
-    web: 'https://maverick-records-l47p.vercel.app',
+    web: 'https://www.maverickrecord.com',
     preguntas: [
       {
         id: 'demos',

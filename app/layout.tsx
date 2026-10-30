@@ -12,7 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Maverick Live · Productora de eventos',
   description:
-    'Mucho más que eventos. En Maverick Live creamos experiencias únicas. Déjanos tu correo y entérate primero de lo que viene.',
+    'Mucho más que eventos. En Maverick Live creamos experiencias únicas. Escríbenos y hagamos realidad tu próximo evento.',
   openGraph: {
     title: 'Maverick Live · Productora de eventos',
     description: 'Mucho más que eventos. Creamos experiencias únicas.',

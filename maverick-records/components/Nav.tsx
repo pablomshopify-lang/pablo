@@ -71,11 +71,11 @@ export function Nav() {
         <Link
           href="/"
           className="nav-logo"
-          aria-label="Maverick Records, inicio"
+          aria-label="Maverick Record, inicio"
           onClick={close}
         >
           <Logo className="logo" />
-          <span className="nav-label">Records</span>
+          <span className="nav-label">Record</span>
         </Link>
         <ul className="nav-links">
           {SECTIONS.map((section) => (

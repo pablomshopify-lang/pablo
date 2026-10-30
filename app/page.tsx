@@ -1,7 +1,7 @@
+import { CONTACT_EMAIL, ContactForm } from '@/components/ContactForm';
 import { Logo, PlayMark } from '@/components/Logo';
 import { Nav } from '@/components/Nav';
 import { Reveal } from '@/components/Reveal';
-import { SubscribeForm } from '@/components/SubscribeForm';
 
 const FEATURES = [
   {
@@ -23,6 +23,22 @@ const FEATURES = [
     title: 'Experiencias a medida',
     text: 'Si lo imaginas, lo diseñamos. Formatos únicos para momentos que no se repiten.',
     wide: true,
+  },
+] as const;
+
+// Las otras webs de Maverick Music Entertainment LLC (sin incluir esta).
+const HOLDING = [
+  {
+    name: 'Mvck Music',
+    href: 'https://mvckmusic.com',
+  },
+  {
+    name: 'Mvck Publishing',
+    href: 'https://www.mvckpublishing.com',
+  },
+  {
+    name: 'Maverick Record',
+    href: 'https://www.maverickrecord.com',
   },
 ] as const;
 
@@ -51,15 +67,17 @@ export default function Home() {
           </Reveal>
           <Reveal delay={160}>
             <p className="lede">
-              En Maverick Live creamos experiencias únicas. Déjanos tu correo y
-              entérate primero de lo que viene.
+              En Maverick Live creamos experiencias únicas. Cuéntanos tu idea y
+              la hacemos realidad.
             </p>
           </Reveal>
-          <Reveal delay={240} className="hero-form">
-            <SubscribeForm />
-            <p className="fineprint">
-              Sin spam. Solo novedades y próximos eventos de Maverick Live.
-            </p>
+          <Reveal delay={240} className="hero-actions">
+            <a href="#contacto" className="button">
+              Contáctanos
+            </a>
+            <a href="#que-hacemos" className="button button-ghost">
+              Qué hacemos
+            </a>
           </Reveal>
           <Reveal delay={320} className="hero-mark-wrap">
             <PlayMark className="hero-mark" gradientId="mark-hero" />
@@ -98,30 +116,49 @@ export default function Home() {
         </section>
 
         <section
-          id="suscribete"
+          id="contacto"
           className="section cta"
           aria-labelledby="cta-title"
         >
           <Reveal>
             <h2 id="cta-title" className="headline">
-              Vive lo que viene.
+              Hablemos de tu evento.
             </h2>
           </Reveal>
           <Reveal delay={100}>
             <p className="lede">
-              Déjanos tu correo y te contamos antes que nadie sobre nuestros
-              próximos eventos.
+              Escríbenos y te respondemos a la brevedad. También puedes
+              escribirnos directo a{' '}
+              <a className="text-link" href={`mailto:${CONTACT_EMAIL}`}>
+                {CONTACT_EMAIL}
+              </a>
+              .
             </p>
           </Reveal>
-          <Reveal delay={200} className="hero-form">
-            <SubscribeForm />
+          <Reveal delay={200} className="contact-wrap">
+            <ContactForm />
           </Reveal>
         </section>
       </main>
 
       <footer className="footer">
-        <Logo className="footer-logo" gradientId="logo-footer" />
-        <p>© {year} Maverick Live. Todos los derechos reservados.</p>
+        <div className="footer-top">
+          <Logo className="footer-logo" gradientId="logo-footer" />
+          <ul className="footer-links" aria-label="Enlaces">
+            <li>
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+            </li>
+            {HOLDING.map((brand) => (
+              <li key={brand.name}>
+                <a href={brand.href}>{brand.name}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p>
+          © {year} Maverick Music Entertainment LLC. Todos los derechos
+          reservados.
+        </p>
       </footer>
     </>
   );

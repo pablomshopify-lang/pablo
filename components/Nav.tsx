@@ -13,8 +13,8 @@ export function Nav() {
             <a href="#que-hacemos">Qué hacemos</a>
           </li>
           <li>
-            <a href="#suscribete" className="button button-small">
-              Avísame
+            <a href="#contacto" className="button button-small">
+              Contáctanos
             </a>
           </li>
         </ul>

@@ -1,7 +1,7 @@
 # Maverick Live · Sitio web
 
 Sitio en **Next.js + TypeScript**, con diseño estilo Apple, listo para publicar en **Vercel**.
-La página de inicio tiene un formulario para dejar el correo (se guarda en **Formspree**).
+La página de inicio tiene un formulario de contacto: cada mensaje llega a **contact@mavericklive.cl** a través de **Formspree**.
 
 ## Qué hay en cada archivo
 
@@ -13,7 +13,7 @@ app/
 components/
   Nav.tsx             Barra de arriba, translúcida
   Logo.tsx            Logotipo y el ícono "play" con el degradado de marca
-  SubscribeForm.tsx   Formulario de correo conectado a Formspree
+  ContactForm.tsx     Formulario de contacto conectado a Formspree
   Reveal.tsx          Animación suave al aparecer cada sección
 .env.example          La variable que debes configurar (ID de Formspree)
 ```
@@ -35,6 +35,8 @@ npm run dev                  # abre http://localhost:3000
 3. Pon ese ID en la variable `NEXT_PUBLIC_FORMSPREE_ID` (en `.env.local` y en Vercel).
 
 El formulario ya viene conectado al ID `xyekqdeo`. La variable solo hace falta si algún día quieres usar otro formulario.
+
+Para que los mensajes lleguen a **contact@mavericklive.cl**: en Formspree abre el formulario, entra a **Settings** y en **Target email** (correo de destino) pon `contact@mavericklive.cl`. Formspree manda un correo de verificación a esa casilla: ábrelo y confirma.
 
 ## Publicar en Vercel
 

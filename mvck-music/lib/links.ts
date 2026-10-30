@@ -7,4 +7,5 @@ export const LINKS = {
   facebook: 'https://www.facebook.com/share/disZWdYcsNqKRXKc/',
   x: 'https://x.com/mvckmusic',
   maverickLive: 'https://maverick-live1.vercel.app',
+  maverickRecord: 'https://www.maverickrecord.com',
 } as const;
