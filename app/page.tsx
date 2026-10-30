@@ -38,7 +38,7 @@ const HOLDING = [
   },
   {
     name: 'Maverick Record',
-    href: 'https://maverick-records-l47p.vercel.app',
+    href: 'https://www.maverickrecord.com',
   },
 ] as const;
 

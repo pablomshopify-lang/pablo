@@ -2,8 +2,8 @@
 export const LINKS = {
   // Correo provisorio: cámbialo cuando exista uno de Maverick Record.
   email: 'contact@maverickrecords.cl',
-  instagram: 'https://www.instagram.com/maverickrecords_/',
-  instagramHandle: '@maverickrecords_',
+  instagram: 'https://www.instagram.com/maverickrecord_/',
+  instagramHandle: '@maverickrecord_',
   mvckMusic: 'https://mvckmusic.com',
   mvckPublishing: 'https://www.mvckpublishing.com',
   maverickLive: 'https://maverick-live1.vercel.app',
