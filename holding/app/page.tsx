@@ -58,13 +58,25 @@ const REASONS = [
   },
 ] as const;
 
-const TEAM = [
+type Member = {
+  name: string;
+  role: string;
+  /** Letras del círculo, si no sirven las iniciales del nombre. */
+  mark?: string;
+};
+
+const TEAM: readonly Member[] = [
   { name: 'Sebastián Biggio', role: 'CEO' },
-  { name: 'Fran', role: 'Departamento Creativo' },
-  { name: 'Pablo Moreno', role: 'Ventas y Marketing' },
-  { name: 'Kim Mujica', role: 'Prensa' },
-  { name: 'Javiera Moreno', role: 'Relaciones Públicas' },
-] as const;
+  { name: 'Pablo Moreno', role: 'COO' },
+  { name: 'Francisca Casas', role: 'Head of Creative' },
+  {
+    name: 'Flowza.co',
+    role: 'Agencia partner: Growth, Marketing & Ventas',
+    mark: 'FZ',
+  },
+  { name: 'Kim Mujica', role: 'Head of Communications' },
+  { name: 'Javiera Moreno', role: 'Head of PR' },
+];
 
 const CONTACTS: readonly Contact[] = [
   {
@@ -318,7 +330,7 @@ export default function Home() {
                       aria-hidden="true"
                       style={{ '--i': i } as CSSProperties}
                     >
-                      {initials(person.name)}
+                      {person.mark ?? initials(person.name)}
                     </span>
                     <span className="person-name">{person.name}</span>
                     <span className="person-role">{person.role}</span>
