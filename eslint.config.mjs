@@ -40,5 +40,6 @@ export default defineConfig([
     'maverick-records/**',
     'ingreso-artistas/**',
     'panel/**',
+    'holding/**',
   ]),
 ]);
