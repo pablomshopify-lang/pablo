@@ -7,6 +7,7 @@ export const LINKS = {
   mvckMusic: 'https://mvckmusic.com',
   mvckPublishing: 'https://www.mvckpublishing.com',
   maverickLive: 'https://maverick-live1.vercel.app',
+  mavsTicket: 'https://mavsticket.com',
 } as const;
 
 /** Abre el correo con el asunto ya escrito, para que enviar música sea un clic. */

@@ -40,6 +40,10 @@ const HOLDING = [
     name: 'Maverick Record',
     href: 'https://www.maverickrecord.com',
   },
+  {
+    name: 'Mavs Ticket',
+    href: 'https://mavsticket.com',
+  },
 ] as const;
 
 export default function Home() {
