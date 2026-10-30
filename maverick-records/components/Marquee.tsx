@@ -4,7 +4,7 @@ const WORDS = [
   'Independiente',
   'Disidente',
   'Libertad creativa',
-  'Maverick Records',
+  'Maverick Record',
 ] as const;
 
 /** Cinta de palabras que se desliza sin fin. Se detiene con movimiento reducido. */

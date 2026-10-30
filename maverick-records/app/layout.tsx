@@ -12,11 +12,11 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: 'Maverick Records · Sello independiente',
+  title: 'Maverick Record · Sello independiente',
   description:
     'Sello 100% independiente y disidente que valora la libertad creativa. Potenciamos las marcas de nuestros artistas para producir, distribuir y promocionar su música.',
   openGraph: {
-    title: 'Maverick Records · Sello independiente',
+    title: 'Maverick Record · Sello independiente',
     description: 'Independientes. Disidentes. Libres.',
     type: 'website',
     locale: 'es_CL',

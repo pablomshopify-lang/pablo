@@ -318,6 +318,9 @@ export default function Home() {
             <li>
               <a href={LINKS.maverickLive}>Maverick Live</a>
             </li>
+            <li>
+              <a href={LINKS.maverickRecord}>Maverick Record</a>
+            </li>
           </ul>
           <ul className="social" aria-label="Redes sociales">
             <li>
