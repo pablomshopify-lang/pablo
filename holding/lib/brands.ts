@@ -73,6 +73,7 @@ export const BRANDS: readonly Brand[] = [
     description:
       'Plataforma eficiente y accesible para comprar y gestionar boletos: una experiencia fácil y confiable para el público, y un canal rentable para los eventos.',
     accent: '#eb7a00',
+    url: 'https://mavsticket.com',
   },
 ];
 
