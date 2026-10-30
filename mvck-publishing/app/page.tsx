@@ -337,8 +337,7 @@ export default function Home() {
         </div>
         <p className="footer-legal">
           © {year} Maverick Music Entertainment LLC. Todos los derechos
-          reservados. Las marcas de las entidades mencionadas pertenecen a sus
-          respectivos dueños.
+          reservados.
         </p>
       </footer>
     </>
