@@ -318,7 +318,7 @@ export default function Home() {
             <Reveal className="section-head">
               <p className="eyebrow">Equipo</p>
               <h2 id="team-title" className="title">
-                Las personas <span className="muted">detrás de cada show.</span>
+                Las personas <span className="muted">detrás de cada artista.</span>
               </h2>
             </Reveal>
             <div className="team">

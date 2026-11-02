@@ -22,7 +22,7 @@ export function PublishingLogo({ className }: LogoProps) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="100 241.5 325.6 123"
       role="img"
-      aria-label="MVCK Publishing"
+      aria-label="Mvck Publishing"
     >
       <path fill="currentColor" d={MVCK} />
       <path fill="currentColor" d={PUBLISHING} />

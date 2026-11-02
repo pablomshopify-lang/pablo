@@ -45,7 +45,7 @@ export const BRANDS: readonly Brand[] = [
   },
   {
     id: 'publishing',
-    name: 'MVCK Publishing',
+    name: 'Mvck Publishing',
     category: 'Editorial',
     tagline: 'Protege y cobra los derechos de autor.',
     description:
