@@ -1,7 +1,7 @@
 # Maverick Music Entertainment · Sitio web del holding
 
 Sitio del holding **Maverick Music Entertainment LLC** en **Next.js + TypeScript**, con diseño estilo Apple, listo para publicar en **Vercel**.
-Presenta las cinco marcas (Maverick Record, Mvck Music, MVCK Publishing, Maverick Live y Mavs Ticket), el ciclo del artista, el equipo y el contacto.
+Presenta las cinco marcas (Maverick Record, Mvck Music, Mvck Publishing, Maverick Live y Mavs Ticket), el ciclo del artista, el equipo y el contacto.
 
 ## Qué hay en cada archivo
 
